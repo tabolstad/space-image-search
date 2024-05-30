@@ -9,7 +9,9 @@ import Foundation
 
 enum APIError: Error {
     case unexpectedResponse
-    case httpResponseError(Int)
+    case badRequest
+    case notFound
+    case serverError
 }
 
 final class NASALibraryAPI {
@@ -31,16 +33,29 @@ final class NASALibraryAPI {
         let (data, urlResponse) = try await urlSession.data(for: request)
 
         // Handle Response
-        guard let response = urlResponse as? HTTPURLResponse else {
-            throw APIError.unexpectedResponse
-        }
-        guard response.statusCode == 200 else {
-            throw APIError.httpResponseError(response.statusCode)
-        }
+        try handleResponse(urlResponse)
         // Decode Data
         let decoder = JSONDecoder()
         let decoded = try decoder.decode(T.self, from: data)
         return decoded
+    }
+
+    private func handleResponse(_ urlResponse: URLResponse) throws {
+        guard let response = urlResponse as? HTTPURLResponse else {
+            throw APIError.unexpectedResponse
+        }
+        switch response.statusCode {
+        case 200:
+            break
+        case 400:
+            throw APIError.badRequest
+        case 404:
+            throw APIError.notFound
+        case 500, 502, 503, 504:
+            throw APIError.serverError
+        default:
+            throw APIError.unexpectedResponse
+        }
     }
 
     private func buildRequest(endpoint: NASAEndpoint) -> URLRequest {
