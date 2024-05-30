@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		142DE4992C08D2D8001043CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4982C08D2D8001043CB /* AppDelegate.swift */; };
 		142DE49B2C08D2D8001043CB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE49A2C08D2D8001043CB /* SceneDelegate.swift */; };
-		142DE49D2C08D2D8001043CB /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE49C2C08D2D8001043CB /* RootViewController.swift */; };
 		142DE4A22C08D2D9001043CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4A12C08D2D9001043CB /* Assets.xcassets */; };
 		142DE4A52C08D2D9001043CB /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4A42C08D2D9001043CB /* Base */; };
 		142DE4B02C08D2D9001043CB /* SpaceImageSearchResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4AF2C08D2D9001043CB /* SpaceImageSearchResponseTests.swift */; };
@@ -21,6 +20,9 @@
 		14E9E5E52C090A5700E0E9B4 /* NASAEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E42C090A5700E0E9B4 /* NASAEndpoint.swift */; };
 		14E9E5E72C0910BD00E0E9B4 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E62C0910BD00E0E9B4 /* APIConfiguration.swift */; };
 		14E9E5F22C091AD800E0E9B4 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5F12C091AD800E0E9B4 /* ImageService.swift */; };
+		14E9E5FE2C0922D800E0E9B4 /* ImageSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5FD2C0922D800E0E9B4 /* ImageSearchView.swift */; };
+		14E9E6002C0922E200E0E9B4 /* ImageSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5FF2C0922E200E0E9B4 /* ImageSearchViewModel.swift */; };
+		14E9E6022C0922EB00E0E9B4 /* ImageSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E6012C0922EB00E0E9B4 /* ImageSearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,6 @@
 		142DE4952C08D2D8001043CB /* SpaceImageSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceImageSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		142DE4982C08D2D8001043CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		142DE49A2C08D2D8001043CB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		142DE49C2C08D2D8001043CB /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		142DE4A12C08D2D9001043CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		142DE4A42C08D2D9001043CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		142DE4A62C08D2D9001043CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,6 +53,9 @@
 		14E9E5E42C090A5700E0E9B4 /* NASAEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAEndpoint.swift; sourceTree = "<group>"; };
 		14E9E5E62C0910BD00E0E9B4 /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		14E9E5F12C091AD800E0E9B4 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		14E9E5FD2C0922D800E0E9B4 /* ImageSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchView.swift; sourceTree = "<group>"; };
+		14E9E5FF2C0922E200E0E9B4 /* ImageSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewModel.swift; sourceTree = "<group>"; };
+		14E9E6012C0922EB00E0E9B4 /* ImageSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,11 +98,11 @@
 		142DE4972C08D2D8001043CB /* SpaceImageSearch */ = {
 			isa = PBXGroup;
 			children = (
+				14E9E5FC2C09221300E0E9B4 /* ImageListView */,
 				14E9E5F02C091AC700E0E9B4 /* Services */,
 				142DE4C82C08DB52001043CB /* NASASearchAPI */,
 				142DE4982C08D2D8001043CB /* AppDelegate.swift */,
 				142DE49A2C08D2D8001043CB /* SceneDelegate.swift */,
-				142DE49C2C08D2D8001043CB /* RootViewController.swift */,
 				142DE4A12C08D2D9001043CB /* Assets.xcassets */,
 				142DE4A32C08D2D9001043CB /* LaunchScreen.storyboard */,
 				142DE4A62C08D2D9001043CB /* Info.plist */,
@@ -150,6 +154,16 @@
 				14E9E5F12C091AD800E0E9B4 /* ImageService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		14E9E5FC2C09221300E0E9B4 /* ImageListView */ = {
+			isa = PBXGroup;
+			children = (
+				14E9E5FD2C0922D800E0E9B4 /* ImageSearchView.swift */,
+				14E9E5FF2C0922E200E0E9B4 /* ImageSearchViewModel.swift */,
+				14E9E6012C0922EB00E0E9B4 /* ImageSearchViewController.swift */,
+			);
+			path = ImageListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,13 +268,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				142DE4CE2C08F1B3001043CB /* APISearchResponse.swift in Sources */,
+				14E9E6002C0922E200E0E9B4 /* ImageSearchViewModel.swift in Sources */,
 				14E9E5E12C09062C00E0E9B4 /* NASALibraryAPI.swift in Sources */,
 				14E9E5F22C091AD800E0E9B4 /* ImageService.swift in Sources */,
 				14E9E5E52C090A5700E0E9B4 /* NASAEndpoint.swift in Sources */,
 				14E9E5E72C0910BD00E0E9B4 /* APIConfiguration.swift in Sources */,
+				14E9E6022C0922EB00E0E9B4 /* ImageSearchViewController.swift in Sources */,
 				14E9E5E32C09087C00E0E9B4 /* HTTPMethod.swift in Sources */,
-				142DE49D2C08D2D8001043CB /* RootViewController.swift in Sources */,
 				142DE4992C08D2D8001043CB /* AppDelegate.swift in Sources */,
+				14E9E5FE2C0922D800E0E9B4 /* ImageSearchView.swift in Sources */,
 				142DE49B2C08D2D8001043CB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
