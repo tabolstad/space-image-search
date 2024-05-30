@@ -16,6 +16,10 @@
 		142DE4CC2C08F14C001043CB /* nasa_search_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4CB2C08F14C001043CB /* nasa_search_response.json */; };
 		142DE4CE2C08F1B3001043CB /* APISearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */; };
 		142DE4D02C08F92A001043CB /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CF2C08F92A001043CB /* TestData.swift */; };
+		14E9E5E12C09062C00E0E9B4 /* NASALibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E02C09062C00E0E9B4 /* NASALibraryAPI.swift */; };
+		14E9E5E32C09087C00E0E9B4 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E22C09087C00E0E9B4 /* HTTPMethod.swift */; };
+		14E9E5E52C090A5700E0E9B4 /* NASAEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E42C090A5700E0E9B4 /* NASAEndpoint.swift */; };
+		14E9E5E72C0910BD00E0E9B4 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E62C0910BD00E0E9B4 /* APIConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,10 @@
 		142DE4CB2C08F14C001043CB /* nasa_search_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nasa_search_response.json; sourceTree = "<group>"; };
 		142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISearchResponse.swift; sourceTree = "<group>"; };
 		142DE4CF2C08F92A001043CB /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		14E9E5E02C09062C00E0E9B4 /* NASALibraryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASALibraryAPI.swift; sourceTree = "<group>"; };
+		14E9E5E22C09087C00E0E9B4 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		14E9E5E42C090A5700E0E9B4 /* NASAEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAEndpoint.swift; sourceTree = "<group>"; };
+		14E9E5E62C0910BD00E0E9B4 /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +115,11 @@
 		142DE4C82C08DB52001043CB /* NASASearchAPI */ = {
 			isa = PBXGroup;
 			children = (
-				142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */,
+				14E9E5DF2C09061200E0E9B4 /* Models */,
+				14E9E5E62C0910BD00E0E9B4 /* APIConfiguration.swift */,
+				14E9E5E42C090A5700E0E9B4 /* NASAEndpoint.swift */,
+				14E9E5E02C09062C00E0E9B4 /* NASALibraryAPI.swift */,
+				14E9E5E22C09087C00E0E9B4 /* HTTPMethod.swift */,
 			);
 			path = NASASearchAPI;
 			sourceTree = "<group>";
@@ -119,6 +131,14 @@
 				142DE4CB2C08F14C001043CB /* nasa_search_response.json */,
 			);
 			path = TestData;
+			sourceTree = "<group>";
+		};
+		14E9E5DF2C09061200E0E9B4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +243,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				142DE4CE2C08F1B3001043CB /* APISearchResponse.swift in Sources */,
+				14E9E5E12C09062C00E0E9B4 /* NASALibraryAPI.swift in Sources */,
+				14E9E5E52C090A5700E0E9B4 /* NASAEndpoint.swift in Sources */,
+				14E9E5E72C0910BD00E0E9B4 /* APIConfiguration.swift in Sources */,
+				14E9E5E32C09087C00E0E9B4 /* HTTPMethod.swift in Sources */,
 				142DE49D2C08D2D8001043CB /* RootViewController.swift in Sources */,
 				142DE4992C08D2D8001043CB /* AppDelegate.swift in Sources */,
 				142DE49B2C08D2D8001043CB /* SceneDelegate.swift in Sources */,
