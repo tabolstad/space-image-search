@@ -47,6 +47,7 @@
 		142DE4B52C08D2D9001043CB /* SpaceImageSearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceImageSearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		142DE4B92C08D2D9001043CB /* SpaceImageSearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImageSearchUITests.swift; sourceTree = "<group>"; };
 		142DE4BB2C08D2D9001043CB /* SpaceImageSearchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImageSearchUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		142DE4C92C08DD0A001043CB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +78,7 @@
 		142DE48C2C08D2D8001043CB = {
 			isa = PBXGroup;
 			children = (
+				142DE4C92C08DD0A001043CB /* README.md */,
 				142DE4972C08D2D8001043CB /* SpaceImageSearch */,
 				142DE4AE2C08D2D9001043CB /* SpaceImageSearchTests */,
 				142DE4B82C08D2D9001043CB /* SpaceImageSearchUITests */,
