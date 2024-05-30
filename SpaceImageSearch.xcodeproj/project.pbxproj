@@ -12,20 +12,14 @@
 		142DE49D2C08D2D8001043CB /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE49C2C08D2D8001043CB /* RootViewController.swift */; };
 		142DE4A22C08D2D9001043CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4A12C08D2D9001043CB /* Assets.xcassets */; };
 		142DE4A52C08D2D9001043CB /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4A42C08D2D9001043CB /* Base */; };
-		142DE4B02C08D2D9001043CB /* SpaceImageSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4AF2C08D2D9001043CB /* SpaceImageSearchTests.swift */; };
-		142DE4BA2C08D2D9001043CB /* SpaceImageSearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4B92C08D2D9001043CB /* SpaceImageSearchUITests.swift */; };
-		142DE4BC2C08D2D9001043CB /* SpaceImageSearchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4BB2C08D2D9001043CB /* SpaceImageSearchUITestsLaunchTests.swift */; };
+		142DE4B02C08D2D9001043CB /* SpaceImageSearchResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4AF2C08D2D9001043CB /* SpaceImageSearchResponseTests.swift */; };
+		142DE4CC2C08F14C001043CB /* nasa_search_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4CB2C08F14C001043CB /* nasa_search_response.json */; };
+		142DE4CE2C08F1B3001043CB /* APISearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */; };
+		142DE4D02C08F92A001043CB /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CF2C08F92A001043CB /* TestData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		142DE4AC2C08D2D9001043CB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 142DE48D2C08D2D8001043CB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 142DE4942C08D2D8001043CB;
-			remoteInfo = SpaceImageSearch;
-		};
-		142DE4B62C08D2D9001043CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 142DE48D2C08D2D8001043CB /* Project object */;
 			proxyType = 1;
@@ -43,11 +37,11 @@
 		142DE4A42C08D2D9001043CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		142DE4A62C08D2D9001043CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		142DE4AB2C08D2D9001043CB /* SpaceImageSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceImageSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		142DE4AF2C08D2D9001043CB /* SpaceImageSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImageSearchTests.swift; sourceTree = "<group>"; };
-		142DE4B52C08D2D9001043CB /* SpaceImageSearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceImageSearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		142DE4B92C08D2D9001043CB /* SpaceImageSearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImageSearchUITests.swift; sourceTree = "<group>"; };
-		142DE4BB2C08D2D9001043CB /* SpaceImageSearchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImageSearchUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		142DE4AF2C08D2D9001043CB /* SpaceImageSearchResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImageSearchResponseTests.swift; sourceTree = "<group>"; };
 		142DE4C92C08DD0A001043CB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		142DE4CB2C08F14C001043CB /* nasa_search_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nasa_search_response.json; sourceTree = "<group>"; };
+		142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISearchResponse.swift; sourceTree = "<group>"; };
+		142DE4CF2C08F92A001043CB /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,13 +59,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		142DE4B22C08D2D9001043CB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -81,7 +68,6 @@
 				142DE4C92C08DD0A001043CB /* README.md */,
 				142DE4972C08D2D8001043CB /* SpaceImageSearch */,
 				142DE4AE2C08D2D9001043CB /* SpaceImageSearchTests */,
-				142DE4B82C08D2D9001043CB /* SpaceImageSearchUITests */,
 				142DE4962C08D2D8001043CB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,7 +77,6 @@
 			children = (
 				142DE4952C08D2D8001043CB /* SpaceImageSearch.app */,
 				142DE4AB2C08D2D9001043CB /* SpaceImageSearchTests.xctest */,
-				142DE4B52C08D2D9001043CB /* SpaceImageSearchUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,6 +84,7 @@
 		142DE4972C08D2D8001043CB /* SpaceImageSearch */ = {
 			isa = PBXGroup;
 			children = (
+				142DE4C82C08DB52001043CB /* NASASearchAPI */,
 				142DE4982C08D2D8001043CB /* AppDelegate.swift */,
 				142DE49A2C08D2D8001043CB /* SceneDelegate.swift */,
 				142DE49C2C08D2D8001043CB /* RootViewController.swift */,
@@ -112,18 +98,27 @@
 		142DE4AE2C08D2D9001043CB /* SpaceImageSearchTests */ = {
 			isa = PBXGroup;
 			children = (
-				142DE4AF2C08D2D9001043CB /* SpaceImageSearchTests.swift */,
+				142DE4CA2C08F074001043CB /* TestData */,
+				142DE4AF2C08D2D9001043CB /* SpaceImageSearchResponseTests.swift */,
 			);
 			path = SpaceImageSearchTests;
 			sourceTree = "<group>";
 		};
-		142DE4B82C08D2D9001043CB /* SpaceImageSearchUITests */ = {
+		142DE4C82C08DB52001043CB /* NASASearchAPI */ = {
 			isa = PBXGroup;
 			children = (
-				142DE4B92C08D2D9001043CB /* SpaceImageSearchUITests.swift */,
-				142DE4BB2C08D2D9001043CB /* SpaceImageSearchUITestsLaunchTests.swift */,
+				142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */,
 			);
-			path = SpaceImageSearchUITests;
+			path = NASASearchAPI;
+			sourceTree = "<group>";
+		};
+		142DE4CA2C08F074001043CB /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				142DE4CF2C08F92A001043CB /* TestData.swift */,
+				142DE4CB2C08F14C001043CB /* nasa_search_response.json */,
+			);
+			path = TestData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,24 +159,6 @@
 			productReference = 142DE4AB2C08D2D9001043CB /* SpaceImageSearchTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		142DE4B42C08D2D9001043CB /* SpaceImageSearchUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 142DE4C52C08D2D9001043CB /* Build configuration list for PBXNativeTarget "SpaceImageSearchUITests" */;
-			buildPhases = (
-				142DE4B12C08D2D9001043CB /* Sources */,
-				142DE4B22C08D2D9001043CB /* Frameworks */,
-				142DE4B32C08D2D9001043CB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				142DE4B72C08D2D9001043CB /* PBXTargetDependency */,
-			);
-			name = SpaceImageSearchUITests;
-			productName = SpaceImageSearchUITests;
-			productReference = 142DE4B52C08D2D9001043CB /* SpaceImageSearchUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -196,10 +173,6 @@
 						CreatedOnToolsVersion = 15.4;
 					};
 					142DE4AA2C08D2D9001043CB = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = 142DE4942C08D2D8001043CB;
-					};
-					142DE4B42C08D2D9001043CB = {
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = 142DE4942C08D2D8001043CB;
 					};
@@ -220,7 +193,6 @@
 			targets = (
 				142DE4942C08D2D8001043CB /* SpaceImageSearch */,
 				142DE4AA2C08D2D9001043CB /* SpaceImageSearchTests */,
-				142DE4B42C08D2D9001043CB /* SpaceImageSearchUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -239,13 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		142DE4B32C08D2D9001043CB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				142DE4CC2C08F14C001043CB /* nasa_search_response.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142DE4CE2C08F1B3001043CB /* APISearchResponse.swift in Sources */,
 				142DE49D2C08D2D8001043CB /* RootViewController.swift in Sources */,
 				142DE4992C08D2D8001043CB /* AppDelegate.swift in Sources */,
 				142DE49B2C08D2D8001043CB /* SceneDelegate.swift in Sources */,
@@ -266,16 +233,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				142DE4B02C08D2D9001043CB /* SpaceImageSearchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		142DE4B12C08D2D9001043CB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				142DE4BA2C08D2D9001043CB /* SpaceImageSearchUITests.swift in Sources */,
-				142DE4BC2C08D2D9001043CB /* SpaceImageSearchUITestsLaunchTests.swift in Sources */,
+				142DE4B02C08D2D9001043CB /* SpaceImageSearchResponseTests.swift in Sources */,
+				142DE4D02C08F92A001043CB /* TestData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,11 +245,6 @@
 			isa = PBXTargetDependency;
 			target = 142DE4942C08D2D8001043CB /* SpaceImageSearch */;
 			targetProxy = 142DE4AC2C08D2D9001043CB /* PBXContainerItemProxy */;
-		};
-		142DE4B72C08D2D9001043CB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 142DE4942C08D2D8001043CB /* SpaceImageSearch */;
-			targetProxy = 142DE4B62C08D2D9001043CB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -519,42 +473,6 @@
 			};
 			name = Release;
 		};
-		142DE4C62C08D2D9001043CB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4TQM3765NG;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.skilpaddelabs.SpaceImageSearchUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SpaceImageSearch;
-			};
-			name = Debug;
-		};
-		142DE4C72C08D2D9001043CB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4TQM3765NG;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.skilpaddelabs.SpaceImageSearchUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SpaceImageSearch;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -581,15 +499,6 @@
 			buildConfigurations = (
 				142DE4C32C08D2D9001043CB /* Debug */,
 				142DE4C42C08D2D9001043CB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		142DE4C52C08D2D9001043CB /* Build configuration list for PBXNativeTarget "SpaceImageSearchUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				142DE4C62C08D2D9001043CB /* Debug */,
-				142DE4C72C08D2D9001043CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
