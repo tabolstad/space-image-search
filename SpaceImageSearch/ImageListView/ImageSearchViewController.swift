@@ -80,4 +80,13 @@ final class ImageSearchViewController: UICollectionViewController {
         }
         return dataSource
     }
+
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        guard let selectedImage = dataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+        let detailViewController = ImageDetailViewController(spaceImage: selectedImage)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
