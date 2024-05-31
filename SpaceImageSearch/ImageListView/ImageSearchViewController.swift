@@ -67,12 +67,15 @@ final class ImageSearchViewController: UICollectionViewController {
 
     private func buildDataSource() -> ImageCollectionDataSource {
 
-        let dataSource = ImageCollectionDataSource(collectionView: self.collectionView) { (collectionView, indexPath, spaceImage) -> UICollectionViewCell? in
+        let dataSource = ImageCollectionDataSource(collectionView: self.collectionView) { [weak self] (collectionView, indexPath, spaceImage) -> UICollectionViewCell? in
+            guard let self else {
+                return nil
+            }
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.reuseIdentifier, for: indexPath) as! ImageCollectionViewCell
             cell.title.text = "\(spaceImage.title)"
-            cell.preview.image = UIImage(systemName: "person")
             cell.previewUrl = spaceImage.thumbnail
+            cell.fetchImage = self.viewModel.fetchImage
             return cell
         }
         return dataSource

@@ -9,6 +9,28 @@ import UIKit
 
 protocol ImageService {
     func search(query: String) async throws -> [SpaceImage]
+    func fetchImage(url: URL) async throws -> UIImage
+}
+
+extension ImageService {
+    func fetchImage(url: URL) async throws -> UIImage {
+        let session = URLSession(configuration: .default)
+        let (data, response) = try await session.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw ImageServiceError.imageFetchingError
+        }
+        guard let image = UIImage(data: data) else {
+            throw ImageServiceError.imageDataDecodingError
+        }
+        return image
+    }
+}
+
+enum ImageServiceError: Error {
+    case imageFetchingError
+    case imageDataDecodingError
 }
 
 final class NASAImageService: ImageService {

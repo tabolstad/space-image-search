@@ -102,11 +102,11 @@
 		142DE4972C08D2D8001043CB /* SpaceImageSearch */ = {
 			isa = PBXGroup;
 			children = (
+				142DE4982C08D2D8001043CB /* AppDelegate.swift */,
+				142DE49A2C08D2D8001043CB /* SceneDelegate.swift */,
 				14E9E5FC2C09221300E0E9B4 /* ImageListView */,
 				14E9E5F02C091AC700E0E9B4 /* Services */,
 				142DE4C82C08DB52001043CB /* NASASearchAPI */,
-				142DE4982C08D2D8001043CB /* AppDelegate.swift */,
-				142DE49A2C08D2D8001043CB /* SceneDelegate.swift */,
 				142DE4A12C08D2D9001043CB /* Assets.xcassets */,
 				142DE4A32C08D2D9001043CB /* LaunchScreen.storyboard */,
 				142DE4A62C08D2D9001043CB /* Info.plist */,

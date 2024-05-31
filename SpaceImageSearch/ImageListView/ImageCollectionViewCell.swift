@@ -17,21 +17,28 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     let cellCornerRadius: CGFloat = 10.0
     let imageCornerRadius: CGFloat = 8.0
 
+    static let placeholder = UIImage(systemName: "moon.stars")!
+    static let errorPlaceholder = UIImage(systemName: "moon.stars.fill")!
+
     var previewUrl: URL? {
         didSet {
-            fetchImage()
+            updateImage()
         }
     }
-    var imageFetchTask: Task<Void, Error>?
+    var fetchImage: ((URL) async throws -> UIImage)?
+    private var imageFetchTask: Task<Void, Error>?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.lightGray
+        self.tintColor = UIColor.darkGray
         title.textColor = UIColor.darkGray
         preview.backgroundColor = UIColor.gray
         layer.cornerRadius = cellCornerRadius
         preview.layer.cornerRadius = imageCornerRadius
-        preview.contentMode = .scaleAspectFit
+        preview.contentMode = .scaleAspectFill
+        preview.image = Self.placeholder
+        preview.clipsToBounds = true
         setupViewLayout()
     }
 
@@ -66,10 +73,25 @@ final class ImageCollectionViewCell: UICollectionViewCell {
         imageFetchTask?.cancel()
     }
 
-    private func fetchImage() {
-        let task = Task {
-            try await Task.sleep(nanoseconds: 2_000_000_000)
-            applyImage(UIImage(systemName: "clock")!)
+    private func updateImage() {
+
+        guard let previewUrl else {
+            applyImage(Self.errorPlaceholder)
+            return
+        }
+        let task = Task { [weak self] in
+            guard let self else {
+                return
+            }
+            do {
+                guard let image = try await self.fetchImage?(previewUrl) else {
+                    return
+                }
+                applyImage(image)
+            } catch {
+                applyImage(Self.errorPlaceholder)
+                throw error
+            }
         }
         imageFetchTask = task
     }

@@ -21,7 +21,7 @@ extension SpaceImage {
 
         guard let data = apiItem.data.first,
               let link = apiItem.links.first,
-              let thumbnail = URL(string: link.rel) else {
+              let thumbnail = URL(string: link.href) else {
             return nil
         }
 

@@ -24,7 +24,7 @@ final class ImageSearchViewModel {
 
     func updateSnapshot(animatingChange: Bool = false) {
         Task {
-            let images = try! await service.search(query: searchQuery)
+            let images = try await service.search(query: searchQuery)
             Task { @MainActor in
                 var snapshot = ImageDataSourceSnapshot()
                 snapshot.appendSections([.all])
@@ -33,5 +33,9 @@ final class ImageSearchViewModel {
                 dataSource?.apply(snapshot, animatingDifferences: false)
             }
         }
+    }
+
+    func fetchImage(url: URL) async throws -> UIImage {
+        return try await service.fetchImage(url: url)
     }
 }
