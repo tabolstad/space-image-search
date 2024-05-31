@@ -5,13 +5,13 @@
 //  Created by Timothy Bolstad on 5/30/24.
 //
 
-import Foundation
+import UIKit
 
 protocol ImageService {
     func search(query: String) async throws -> [SpaceImage]
 }
 
-class NASAImageService: ImageService {
+final class NASAImageService: ImageService {
 
     let api = NASALibraryAPI(config: .nasa)
 
@@ -24,3 +24,46 @@ class NASAImageService: ImageService {
         return images
     }
 }
+
+#if DEBUG
+final class MockImageService: ImageService {
+    func search(query: String) async throws -> [SpaceImage] {
+        let images = [
+            SpaceImage(id: "A",
+                       description: "Image A is a space image.",
+                       location: "JPL",
+                       photographer: "Jane Doe",
+                       thumbnail: URL(safe: "https://images-assets.nasa.gov/image/PIA04826/PIA04826~thumb.jpg"),
+                       title: "Image A"),
+            SpaceImage(id: "B",
+                       description: "Image B is another space image.",
+                       location: "JPL",
+                       photographer: "John Doe",
+                       thumbnail: URL(safe: "https://images-assets.nasa.gov/image/PIA05151/PIA05151~thumb.jpg"),
+                       title: "Image B"),
+            SpaceImage(id: "C",
+                       description: "Image C is another space image.",
+                       location: "JPL",
+                       photographer: "John Doe",
+                       thumbnail: URL(safe: "https://images-assets.nasa.gov/image/PIA05151/PIA05151~thumb.jpg"),
+                       title: "Image C"),
+            SpaceImage(id: "D",
+                       description: "Image D is another space image.",
+                       location: "JPL",
+                       photographer: "John Doe",
+                       thumbnail: URL(safe: "https://images-assets.nasa.gov/image/PIA05151/PIA05151~thumb.jpg"),
+                       title: "Image D")
+        ]
+        return images
+    }
+}
+
+extension URL {
+    init(safe: String) {
+        guard let url = URL(string: safe) else {
+            fatalError("Safe URL is misconfigured: \(safe)")
+        }
+        self = url
+    }
+}
+#endif

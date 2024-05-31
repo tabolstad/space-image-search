@@ -17,12 +17,12 @@
 		142DE4D02C08F92A001043CB /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CF2C08F92A001043CB /* TestData.swift */; };
 		14D768AE2C09661E003A89FE /* SpaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D768AD2C09661E003A89FE /* SpaceImage.swift */; };
 		14D768B02C09EAF7003A89FE /* SpaceImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D768AF2C09EAF7003A89FE /* SpaceImageTests.swift */; };
+		14D768B22C09FE98003A89FE /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D768B12C09FE98003A89FE /* ImageCollectionViewCell.swift */; };
 		14E9E5E12C09062C00E0E9B4 /* NASALibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E02C09062C00E0E9B4 /* NASALibraryAPI.swift */; };
 		14E9E5E32C09087C00E0E9B4 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E22C09087C00E0E9B4 /* HTTPMethod.swift */; };
 		14E9E5E52C090A5700E0E9B4 /* NASAEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E42C090A5700E0E9B4 /* NASAEndpoint.swift */; };
 		14E9E5E72C0910BD00E0E9B4 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E62C0910BD00E0E9B4 /* APIConfiguration.swift */; };
 		14E9E5F22C091AD800E0E9B4 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5F12C091AD800E0E9B4 /* ImageService.swift */; };
-		14E9E5FE2C0922D800E0E9B4 /* ImageSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5FD2C0922D800E0E9B4 /* ImageSearchView.swift */; };
 		14E9E6002C0922E200E0E9B4 /* ImageSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5FF2C0922E200E0E9B4 /* ImageSearchViewModel.swift */; };
 		14E9E6022C0922EB00E0E9B4 /* ImageSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E6012C0922EB00E0E9B4 /* ImageSearchViewController.swift */; };
 /* End PBXBuildFile section */
@@ -52,12 +52,12 @@
 		142DE4CF2C08F92A001043CB /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		14D768AD2C09661E003A89FE /* SpaceImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImage.swift; sourceTree = "<group>"; };
 		14D768AF2C09EAF7003A89FE /* SpaceImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImageTests.swift; sourceTree = "<group>"; };
+		14D768B12C09FE98003A89FE /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		14E9E5E02C09062C00E0E9B4 /* NASALibraryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASALibraryAPI.swift; sourceTree = "<group>"; };
 		14E9E5E22C09087C00E0E9B4 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		14E9E5E42C090A5700E0E9B4 /* NASAEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAEndpoint.swift; sourceTree = "<group>"; };
 		14E9E5E62C0910BD00E0E9B4 /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		14E9E5F12C091AD800E0E9B4 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
-		14E9E5FD2C0922D800E0E9B4 /* ImageSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchView.swift; sourceTree = "<group>"; };
 		14E9E5FF2C0922E200E0E9B4 /* ImageSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewModel.swift; sourceTree = "<group>"; };
 		14E9E6012C0922EB00E0E9B4 /* ImageSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,9 +165,9 @@
 		14E9E5FC2C09221300E0E9B4 /* ImageListView */ = {
 			isa = PBXGroup;
 			children = (
-				14E9E5FD2C0922D800E0E9B4 /* ImageSearchView.swift */,
 				14E9E5FF2C0922E200E0E9B4 /* ImageSearchViewModel.swift */,
 				14E9E6012C0922EB00E0E9B4 /* ImageSearchViewController.swift */,
+				14D768B12C09FE98003A89FE /* ImageCollectionViewCell.swift */,
 			);
 			path = ImageListView;
 			sourceTree = "<group>";
@@ -283,8 +283,8 @@
 				14E9E6022C0922EB00E0E9B4 /* ImageSearchViewController.swift in Sources */,
 				14E9E5E32C09087C00E0E9B4 /* HTTPMethod.swift in Sources */,
 				142DE4992C08D2D8001043CB /* AppDelegate.swift in Sources */,
-				14E9E5FE2C0922D800E0E9B4 /* ImageSearchView.swift in Sources */,
 				142DE49B2C08D2D8001043CB /* SceneDelegate.swift in Sources */,
+				14D768B22C09FE98003A89FE /* ImageCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

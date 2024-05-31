@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SpaceImage {
+struct SpaceImage: Hashable {
     let id: String
     let description: String
     let location: String

@@ -16,7 +16,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         let window = UIWindow(windowScene: windowScene)
-        let rootViewController = ImageSearchViewController(service: NASAImageService())
+        // let service = NASAImageService()
+        let service = MockImageService()
+        let rootViewController = ImageSearchViewController(service: service)
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window.rootViewController = navigationController
         self.window = window
