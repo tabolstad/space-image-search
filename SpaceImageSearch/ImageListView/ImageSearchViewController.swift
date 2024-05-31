@@ -13,7 +13,12 @@ final class ImageSearchViewController: UICollectionViewController {
         case all
     }
 
-    private let reuseIdentifier = "ImageCollectionCell"
+    let searchBar = UISearchBar()
+
+    static let headerSupplementaryView = "HeaderSupplementaryView"
+    private static let searchReuseIdentifier = "SearchReuseIdentifier"
+    private static let imageReuseIdentifier = "ImageCollectionCell"
+
     private let viewModel: ImageSearchViewModel
     private let imageService: ImageService
 
@@ -37,7 +42,11 @@ final class ImageSearchViewController: UICollectionViewController {
         viewModel.dataSource = dataSource
         
         self.collectionView.backgroundColor = UIColor.white
-        self.collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+
+        self.collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: Self.imageReuseIdentifier)
+        self.collectionView.register(SearchHeader.self,
+                                     forSupplementaryViewOfKind: Self.headerSupplementaryView,
+                                     withReuseIdentifier: Self.searchReuseIdentifier)
 
         self.title = "Space Image Search"
     }
@@ -47,28 +56,48 @@ final class ImageSearchViewController: UICollectionViewController {
     }
 
     static func makeLayout() -> UICollectionViewLayout {
-        
-        let layout = UICollectionViewCompositionalLayout { (section: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            let itemLayoutSize = NSCollectionLayoutSize(
-                widthDimension: NSCollectionLayoutDimension.fractionalWidth(1.0 / CGFloat(columns)),
-                heightDimension: NSCollectionLayoutDimension.uniformAcrossSiblings(estimate: itemHeight)
-            )
-            let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
 
-            let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: NSCollectionLayoutDimension.uniformAcrossSiblings(estimate: itemHeight)
-            )
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: columns)
-            group.interItemSpacing = NSCollectionLayoutSpacing.fixed(itemSpacing)
-            let section = NSCollectionLayoutSection(group: group)
-            section.interGroupSpacing = lineSpacing
-            section.contentInsets = NSDirectionalEdgeInsets(top: contentInset,
-                                                            leading: contentInset,
-                                                            bottom: contentInset,
-                                                            trailing: contentInset)
-            return section
-        }
+        // Image Items
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: NSCollectionLayoutDimension.fractionalWidth(1.0 / CGFloat(columns)),
+            heightDimension: NSCollectionLayoutDimension.uniformAcrossSiblings(estimate: itemHeight)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: NSCollectionLayoutDimension.uniformAcrossSiblings(estimate: itemHeight)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: columns)
+        group.interItemSpacing = NSCollectionLayoutSpacing.fixed(itemSpacing)
+
+        // Search Header
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(50.0)
+        )
+        let searchHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: Self.headerSupplementaryView,
+            alignment: .top
+        )
+        searchHeader.pinToVisibleBounds = true
+
+        // Configure Section
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = lineSpacing
+        section.contentInsets = NSDirectionalEdgeInsets(top: contentInset,
+                                                        leading: contentInset,
+                                                        bottom: contentInset,
+                                                        trailing: contentInset)
+
+        section.boundarySupplementaryItems = [searchHeader]
+
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        let layout = UICollectionViewCompositionalLayout(
+            section: section,
+            configuration: config
+        )
         return layout
     }
 
@@ -79,11 +108,28 @@ final class ImageSearchViewController: UICollectionViewController {
                 return nil
             }
 
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.reuseIdentifier, for: indexPath) as! ImageCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.imageReuseIdentifier, for: indexPath) as! ImageCollectionViewCell
             cell.title.text = "\(spaceImage.title)"
             cell.previewUrl = spaceImage.thumbnail
             cell.fetchImage = self.viewModel.fetchImage
             return cell
+        }
+
+        dataSource.supplementaryViewProvider = { [weak self] (
+            collectionView: UICollectionView,
+            kind: String,
+            indexPath: IndexPath) -> UICollectionReusableView? in
+
+            guard let self else {
+                return nil
+            }
+
+            let searchHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: Self.headerSupplementaryView,
+                withReuseIdentifier: Self.searchReuseIdentifier,
+                for: indexPath) as? SearchHeader
+            searchHeader?.searchField.delegate = viewModel
+            return searchHeader
         }
         return dataSource
     }

@@ -15,6 +15,7 @@
 		142DE4CC2C08F14C001043CB /* nasa_search_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4CB2C08F14C001043CB /* nasa_search_response.json */; };
 		142DE4CE2C08F1B3001043CB /* APISearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */; };
 		142DE4D02C08F92A001043CB /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CF2C08F92A001043CB /* TestData.swift */; };
+		14CF8A4F2C0A5EF1001C4441 /* SearchHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CF8A4E2C0A5EF1001C4441 /* SearchHeader.swift */; };
 		14D768AE2C09661E003A89FE /* SpaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D768AD2C09661E003A89FE /* SpaceImage.swift */; };
 		14D768B02C09EAF7003A89FE /* SpaceImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D768AF2C09EAF7003A89FE /* SpaceImageTests.swift */; };
 		14D768B22C09FE98003A89FE /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D768B12C09FE98003A89FE /* ImageCollectionViewCell.swift */; };
@@ -53,6 +54,7 @@
 		142DE4CB2C08F14C001043CB /* nasa_search_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nasa_search_response.json; sourceTree = "<group>"; };
 		142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISearchResponse.swift; sourceTree = "<group>"; };
 		142DE4CF2C08F92A001043CB /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		14CF8A4E2C0A5EF1001C4441 /* SearchHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeader.swift; sourceTree = "<group>"; };
 		14D768AD2C09661E003A89FE /* SpaceImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImage.swift; sourceTree = "<group>"; };
 		14D768AF2C09EAF7003A89FE /* SpaceImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImageTests.swift; sourceTree = "<group>"; };
 		14D768B12C09FE98003A89FE /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				14E9E5FF2C0922E200E0E9B4 /* ImageSearchViewModel.swift */,
 				14E9E6012C0922EB00E0E9B4 /* ImageSearchViewController.swift */,
 				14D768B12C09FE98003A89FE /* ImageCollectionViewCell.swift */,
+				14CF8A4E2C0A5EF1001C4441 /* SearchHeader.swift */,
 			);
 			path = ImageListView;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				14E9E6022C0922EB00E0E9B4 /* ImageSearchViewController.swift in Sources */,
 				14D768B72C0A2DB2003A89FE /* ImageDetailViewController.swift in Sources */,
 				14E9E5E32C09087C00E0E9B4 /* HTTPMethod.swift in Sources */,
+				14CF8A4F2C0A5EF1001C4441 /* SearchHeader.swift in Sources */,
 				142DE4992C08D2D8001043CB /* AppDelegate.swift in Sources */,
 				142DE49B2C08D2D8001043CB /* SceneDelegate.swift in Sources */,
 				14D768B22C09FE98003A89FE /* ImageCollectionViewCell.swift in Sources */,

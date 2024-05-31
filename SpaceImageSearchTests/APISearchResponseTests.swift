@@ -39,5 +39,6 @@ final class APISearchResponseTests: XCTestCase {
         XCTAssertNil(data.location)
         XCTAssertNil(data.photographer)
         XCTAssertNil(data.secondary_creator)
+        XCTAssertNil(item.links)
     }
 }

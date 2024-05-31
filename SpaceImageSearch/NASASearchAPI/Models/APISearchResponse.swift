@@ -22,7 +22,7 @@ struct APICollection: Decodable {
 struct APIItem: Decodable {
     let href: String
     let data: [APIDataItem]
-    let links: [APILink]
+    let links: [APILink]?
 }
 
 struct APIDataItem: Decodable {

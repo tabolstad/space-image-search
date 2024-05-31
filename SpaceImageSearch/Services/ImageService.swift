@@ -38,7 +38,7 @@ final class NASAImageService: ImageService {
     let api = NASALibraryAPI(config: .nasa)
 
     func search(query: String) async throws -> [SpaceImage] {
-        let query = URLQueryItem(name: "q", value: "Rover")
+        let query = URLQueryItem(name: "q", value: query)
         let response: APISearchResponse = try await api.request(.search([query]))
         let images = response.collection.items.compactMap {
             SpaceImage(apiItem: $0)

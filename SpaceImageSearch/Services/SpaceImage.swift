@@ -20,7 +20,7 @@ extension SpaceImage {
     init?(apiItem: APIItem) {
 
         guard let data = apiItem.data.first,
-              let link = apiItem.links.first,
+              let link = apiItem.links?.first,
               let thumbnail = URL(string: link.href) else {
             return nil
         }

@@ -26,7 +26,7 @@
 			"href": "https://images-assets.nasa.gov/image/PIA05151/collection.json",
 			"data": [{
 				"center": "JPL",
-				"title": "Over the Rover",
+				"title": "This one tests nil properties",
 				"nasa_id": "PIA05151",
 				"date_created": "2004-01-26T17:23:59Z",
 				"keywords": ["Mars", "Mars Exploration Rover MER"],
@@ -34,11 +34,6 @@
 				"description_508": "Over the Rover",
 				"description": "Over the Rover"
 			}],
-			"links": [{
-				"href": "https://images-assets.nasa.gov/image/PIA05151/PIA05151~thumb.jpg",
-				"rel": "preview",
-				"render": "image"
-			}]
 		}, {
 			"href": "https://images-assets.nasa.gov/image/PIA04422/collection.json",
 			"data": [{
