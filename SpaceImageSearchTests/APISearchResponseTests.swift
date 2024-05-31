@@ -8,7 +8,7 @@
 import XCTest
 @testable import SpaceImageSearch
 
-final class SpaceImageSearchResponseTests: XCTestCase {
+final class APISearchResponseTests: XCTestCase {
 
     func testSearchResponseDecoding() throws {
 

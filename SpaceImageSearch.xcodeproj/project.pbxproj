@@ -11,10 +11,12 @@
 		142DE49B2C08D2D8001043CB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE49A2C08D2D8001043CB /* SceneDelegate.swift */; };
 		142DE4A22C08D2D9001043CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4A12C08D2D9001043CB /* Assets.xcassets */; };
 		142DE4A52C08D2D9001043CB /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4A42C08D2D9001043CB /* Base */; };
-		142DE4B02C08D2D9001043CB /* SpaceImageSearchResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4AF2C08D2D9001043CB /* SpaceImageSearchResponseTests.swift */; };
+		142DE4B02C08D2D9001043CB /* APISearchResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4AF2C08D2D9001043CB /* APISearchResponseTests.swift */; };
 		142DE4CC2C08F14C001043CB /* nasa_search_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4CB2C08F14C001043CB /* nasa_search_response.json */; };
 		142DE4CE2C08F1B3001043CB /* APISearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */; };
 		142DE4D02C08F92A001043CB /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CF2C08F92A001043CB /* TestData.swift */; };
+		14D768AE2C09661E003A89FE /* SpaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D768AD2C09661E003A89FE /* SpaceImage.swift */; };
+		14D768B02C09EAF7003A89FE /* SpaceImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D768AF2C09EAF7003A89FE /* SpaceImageTests.swift */; };
 		14E9E5E12C09062C00E0E9B4 /* NASALibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E02C09062C00E0E9B4 /* NASALibraryAPI.swift */; };
 		14E9E5E32C09087C00E0E9B4 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E22C09087C00E0E9B4 /* HTTPMethod.swift */; };
 		14E9E5E52C090A5700E0E9B4 /* NASAEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E5E42C090A5700E0E9B4 /* NASAEndpoint.swift */; };
@@ -43,11 +45,13 @@
 		142DE4A42C08D2D9001043CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		142DE4A62C08D2D9001043CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		142DE4AB2C08D2D9001043CB /* SpaceImageSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceImageSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		142DE4AF2C08D2D9001043CB /* SpaceImageSearchResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImageSearchResponseTests.swift; sourceTree = "<group>"; };
+		142DE4AF2C08D2D9001043CB /* APISearchResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISearchResponseTests.swift; sourceTree = "<group>"; };
 		142DE4C92C08DD0A001043CB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		142DE4CB2C08F14C001043CB /* nasa_search_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nasa_search_response.json; sourceTree = "<group>"; };
 		142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISearchResponse.swift; sourceTree = "<group>"; };
 		142DE4CF2C08F92A001043CB /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		14D768AD2C09661E003A89FE /* SpaceImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImage.swift; sourceTree = "<group>"; };
+		14D768AF2C09EAF7003A89FE /* SpaceImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceImageTests.swift; sourceTree = "<group>"; };
 		14E9E5E02C09062C00E0E9B4 /* NASALibraryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASALibraryAPI.swift; sourceTree = "<group>"; };
 		14E9E5E22C09087C00E0E9B4 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		14E9E5E42C090A5700E0E9B4 /* NASAEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAEndpoint.swift; sourceTree = "<group>"; };
@@ -114,7 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				142DE4CA2C08F074001043CB /* TestData */,
-				142DE4AF2C08D2D9001043CB /* SpaceImageSearchResponseTests.swift */,
+				142DE4AF2C08D2D9001043CB /* APISearchResponseTests.swift */,
+				14D768AF2C09EAF7003A89FE /* SpaceImageTests.swift */,
 			);
 			path = SpaceImageSearchTests;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				14E9E5F12C091AD800E0E9B4 /* ImageService.swift */,
+				14D768AD2C09661E003A89FE /* SpaceImage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -268,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				142DE4CE2C08F1B3001043CB /* APISearchResponse.swift in Sources */,
+				14D768AE2C09661E003A89FE /* SpaceImage.swift in Sources */,
 				14E9E6002C0922E200E0E9B4 /* ImageSearchViewModel.swift in Sources */,
 				14E9E5E12C09062C00E0E9B4 /* NASALibraryAPI.swift in Sources */,
 				14E9E5F22C091AD800E0E9B4 /* ImageService.swift in Sources */,
@@ -285,7 +292,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				142DE4B02C08D2D9001043CB /* SpaceImageSearchResponseTests.swift in Sources */,
+				142DE4B02C08D2D9001043CB /* APISearchResponseTests.swift in Sources */,
+				14D768B02C09EAF7003A89FE /* SpaceImageTests.swift in Sources */,
 				142DE4D02C08F92A001043CB /* TestData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

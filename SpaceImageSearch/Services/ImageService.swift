@@ -8,16 +8,19 @@
 import Foundation
 
 protocol ImageService {
-    func search(query: String) async throws -> APISearchResponse
+    func search(query: String) async throws -> [SpaceImage]
 }
 
 class NASAImageService: ImageService {
 
     let api = NASALibraryAPI(config: .nasa)
 
-    func search(query: String) async throws -> APISearchResponse {
+    func search(query: String) async throws -> [SpaceImage] {
         let query = URLQueryItem(name: "q", value: "Rover")
         let response: APISearchResponse = try await api.request(.search([query]))
-        return response
+        let images = response.collection.items.compactMap {
+            SpaceImage(apiItem: $0)
+        }
+        return images
     }
 }
