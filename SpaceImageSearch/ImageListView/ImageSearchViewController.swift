@@ -38,6 +38,8 @@ final class ImageSearchViewController: UICollectionViewController {
         
         self.collectionView.backgroundColor = UIColor.white
         self.collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+
+        self.title = "Space Image Search"
     }
 
     required init?(coder: NSCoder) {
