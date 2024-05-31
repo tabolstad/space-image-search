@@ -18,6 +18,7 @@ final class ImageSearchViewModel: NSObject {
 
     private let debounceTime: UInt64 = 500_000_000
     private var searchQuery: String = "Mars"
+    var searchTopic: SearchTopic? = .title
     private var searchTask: Task<Void, any Error>?
 
     init(imageService: ImageService) {
@@ -31,7 +32,7 @@ final class ImageSearchViewModel: NSObject {
         searchTask = nil
         let newSearch = Task {
             try await Task.sleep(nanoseconds: debounceTime)
-            let images = try await imageService.search(query: searchQuery)
+            let images = try await imageService.search(query: searchQuery, searchTopic: searchTopic)
             await replaceImages(images, animatingChange: true)
         }
         searchTask = newSearch
@@ -57,6 +58,16 @@ final class ImageSearchViewModel: NSObject {
 
     func fetchImage(url: URL) async throws -> UIImage {
         return try await imageService.fetchImage(url: url)
+    }
+
+    @objc
+    func topicSelected(sender: AnyObject) {
+        if let sender = sender as? UISegmentedControl,
+           let topic = SearchTopic(rawValue: sender.selectedSegmentIndex) {
+            searchTopic = topic
+        } else {
+            searchTopic = nil
+        }
     }
 }
 

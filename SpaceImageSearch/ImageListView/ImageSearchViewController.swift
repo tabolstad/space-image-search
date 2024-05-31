@@ -74,7 +74,7 @@ final class ImageSearchViewController: UICollectionViewController {
         // Search Header
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(50.0)
+            heightDimension: .absolute(70.0)
         )
         let searchHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -129,6 +129,10 @@ final class ImageSearchViewController: UICollectionViewController {
                 withReuseIdentifier: Self.searchReuseIdentifier,
                 for: indexPath) as? SearchHeader
             searchHeader?.searchField.delegate = viewModel
+            searchHeader?.categoryPicker.selectedSegmentIndex = viewModel.searchTopic?.rawValue ?? 0
+            searchHeader?.categoryPicker.addTarget(viewModel, action: #selector(ImageSearchViewModel.topicSelected(sender:)), for: .valueChanged)
+
+
             return searchHeader
         }
         return dataSource

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ImageService {
-    func search(query: String) async throws -> [SpaceImage]
+    func search(query: String, searchTopic: SearchTopic?) async throws -> [SpaceImage]
     func fetchImage(url: URL) async throws -> UIImage
 }
 
@@ -33,12 +33,34 @@ enum ImageServiceError: Error {
     case imageDataDecodingError
 }
 
+enum SearchTopic: Int {
+    case title
+    case photographer
+    case location
+
+    var parameter: String {
+        switch self {
+        case .title:
+            "title"
+        case .photographer:
+            "photographer"
+        case .location:
+            "location"
+        }
+    }
+
+    static var freeTextSearch: String {
+        return "q"
+    }
+}
+
 final class NASAImageService: ImageService {
 
     let api = NASALibraryAPI(config: .nasa)
 
-    func search(query: String) async throws -> [SpaceImage] {
-        let query = URLQueryItem(name: "q", value: query)
+    func search(query: String, searchTopic: SearchTopic?) async throws -> [SpaceImage] {
+        let searchTopic = searchTopic?.parameter ?? SearchTopic.freeTextSearch
+        let query = URLQueryItem(name: searchTopic, value: query)
         let response: APISearchResponse = try await api.request(.search([query]))
         let images = response.collection.items.compactMap {
             SpaceImage(apiItem: $0)
@@ -49,7 +71,7 @@ final class NASAImageService: ImageService {
 
 #if DEBUG
 final class MockImageService: ImageService {
-    func search(query: String) async throws -> [SpaceImage] {
+    func search(query: String, searchTopic: SearchTopic?) async throws -> [SpaceImage] {
         let images = [
             SpaceImage(id: "A",
                        description: "Image A is a space image.",
