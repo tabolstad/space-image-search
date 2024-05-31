@@ -12,19 +12,19 @@ typealias ImageDataSourceSnapshot = NSDiffableDataSourceSnapshot<ImageSearchView
 
 final class ImageSearchViewModel {
 
-    private var service: ImageService
+    private var imageService: ImageService
 
     var searchQuery: String = ""
     var dataSource: ImageCollectionDataSource?
 
-    init(service: ImageService) {
-        self.service = service
+    init(imageService: ImageService) {
+        self.imageService = imageService
         updateSnapshot(animatingChange: false)
     }
 
     func updateSnapshot(animatingChange: Bool = false) {
         Task {
-            let images = try await service.search(query: searchQuery)
+            let images = try await imageService.search(query: searchQuery)
             Task { @MainActor in
                 var snapshot = ImageDataSourceSnapshot()
                 snapshot.appendSections([.all])
@@ -36,6 +36,6 @@ final class ImageSearchViewModel {
     }
 
     func fetchImage(url: URL) async throws -> UIImage {
-        return try await service.fetchImage(url: url)
+        return try await imageService.fetchImage(url: url)
     }
 }

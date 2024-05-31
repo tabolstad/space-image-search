@@ -11,8 +11,12 @@ final class ImageDetailViewController: UIViewController {
 
     let viewModel: ImageDetailViewModel
 
-    init(spaceImage: SpaceImage) {
-        let viewModel = ImageDetailViewModel(spaceImage: spaceImage)
+    init(spaceImage: SpaceImage, imageService: ImageService, thumbnail: UIImage?) {
+        let viewModel = ImageDetailViewModel(
+            spaceImage: spaceImage,
+            imageService: imageService,
+            thumbnail: thumbnail
+        )
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

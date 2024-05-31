@@ -15,6 +15,8 @@ final class ImageSearchViewController: UICollectionViewController {
 
     private let reuseIdentifier = "ImageCollectionCell"
     private let viewModel: ImageSearchViewModel
+    private let imageService: ImageService
+
     private lazy var dataSource: ImageCollectionDataSource = buildDataSource()
 
     private static var columns: Int = 3
@@ -24,10 +26,12 @@ final class ImageSearchViewController: UICollectionViewController {
     private static var lineSpacing: CGFloat = 4
     private static var contentInset: CGFloat = 16
 
-    init(service: ImageService) {
-        
-        let viewModel = ImageSearchViewModel(service: service)
+    init(imageService: ImageService) {
+
+        let viewModel = ImageSearchViewModel(imageService: imageService)
         self.viewModel = viewModel
+        self.imageService = imageService
+
         let layout = Self.makeLayout()
         super.init(collectionViewLayout: layout)
         viewModel.dataSource = dataSource
@@ -86,7 +90,17 @@ final class ImageSearchViewController: UICollectionViewController {
         guard let selectedImage = dataSource.itemIdentifier(for: indexPath) else {
             return
         }
-        let detailViewController = ImageDetailViewController(spaceImage: selectedImage)
+
+        var thumbnail: UIImage?
+        if let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell {
+            thumbnail = cell.preview.image
+        }
+
+        let detailViewController = ImageDetailViewController(
+            spaceImage: selectedImage,
+            imageService: imageService,
+            thumbnail: thumbnail
+        )
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

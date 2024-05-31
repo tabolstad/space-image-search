@@ -33,6 +33,7 @@ final class ImageCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = UIColor.lightGray
         self.tintColor = UIColor.darkGray
         title.textColor = UIColor.darkGray
+        title.font = UIFont.preferredFont(forTextStyle: .caption2)
         preview.backgroundColor = UIColor.gray
         layer.cornerRadius = cellCornerRadius
         preview.layer.cornerRadius = imageCornerRadius
@@ -59,11 +60,11 @@ final class ImageCollectionViewCell: UICollectionViewCell {
             preview.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             preview.topAnchor.constraint(equalTo: topAnchor, constant: padding),
             preview.bottomAnchor.constraint(equalTo: title.topAnchor, constant: -spacing),
+            preview.heightAnchor.constraint(equalTo: preview.widthAnchor),
 
             title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             title.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
-            title.heightAnchor.constraint(equalToConstant: 20)
         ]
         NSLayoutConstraint.activate(constraints)
     }
