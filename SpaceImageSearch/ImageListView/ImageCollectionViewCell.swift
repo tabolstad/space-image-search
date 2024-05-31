@@ -30,16 +30,19 @@ final class ImageCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.lightGray
-        self.tintColor = UIColor.darkGray
-        title.textColor = UIColor.darkGray
-        title.font = UIFont.preferredFont(forTextStyle: .caption2)
-        preview.backgroundColor = UIColor.gray
+        tintColor = UIColor.darkGray
         layer.cornerRadius = cellCornerRadius
+        
+        preview.backgroundColor = UIColor.gray
         preview.layer.cornerRadius = imageCornerRadius
         preview.contentMode = .scaleAspectFill
         preview.image = Self.placeholder
         preview.clipsToBounds = true
+
+        title.textColor = UIColor.darkGray
+        title.font = UIFont.preferredFont(forTextStyle: .caption2)
+        title.textAlignment = .center
+
         setupViewLayout()
     }
 
@@ -56,9 +59,9 @@ final class ImageCollectionViewCell: UICollectionViewCell {
         preview.translatesAutoresizingMaskIntoConstraints = false
 
         let constraints = [
-            preview.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-            preview.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            preview.topAnchor.constraint(equalTo: topAnchor, constant: padding),
+            preview.leadingAnchor.constraint(equalTo: leadingAnchor),
+            preview.trailingAnchor.constraint(equalTo: trailingAnchor),
+            preview.topAnchor.constraint(equalTo: topAnchor),
             preview.bottomAnchor.constraint(equalTo: title.topAnchor, constant: -spacing),
             preview.heightAnchor.constraint(equalTo: preview.widthAnchor),
 

@@ -20,7 +20,7 @@ final class ImageSearchViewController: UICollectionViewController {
     private lazy var dataSource: ImageCollectionDataSource = buildDataSource()
 
     private static var columns: Int = 3
-    private static var itemHeight: CGFloat = 140
+    private static var itemHeight: CGFloat = 150
     private static var itemInset: CGFloat = 4
     private static var itemSpacing: CGFloat = 4
     private static var lineSpacing: CGFloat = 4
@@ -51,13 +51,14 @@ final class ImageSearchViewController: UICollectionViewController {
         let layout = UICollectionViewCompositionalLayout { (section: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             let itemLayoutSize = NSCollectionLayoutSize(
                 widthDimension: NSCollectionLayoutDimension.fractionalWidth(1.0 / CGFloat(columns)),
-                heightDimension: NSCollectionLayoutDimension.absolute(itemHeight)
+                heightDimension: NSCollectionLayoutDimension.uniformAcrossSiblings(estimate: itemHeight)
             )
             let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
-            item.contentInsets = NSDirectionalEdgeInsets(
-                top: itemInset, leading: itemInset, bottom: itemInset, trailing: itemInset
+
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: NSCollectionLayoutDimension.uniformAcrossSiblings(estimate: itemHeight)
             )
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),  heightDimension: .uniformAcrossSiblings(estimate: itemHeight))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: columns)
             group.interItemSpacing = NSCollectionLayoutSpacing.fixed(itemSpacing)
             let section = NSCollectionLayoutSection(group: group)
