@@ -113,6 +113,7 @@ final class ImageSearchViewModel: NSObject {
         } else {
             searchTopic = nil
         }
+        clearImages()
     }
 }
 
