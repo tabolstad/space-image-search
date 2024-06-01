@@ -49,6 +49,10 @@ final class ImageSearchViewController: UICollectionViewController {
                                      withReuseIdentifier: Self.searchReuseIdentifier)
 
         self.title = "Space Image Search"
+
+        viewModel.showSearchError = { [weak self] error in
+            self?.showSearchError(error)
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -136,6 +140,18 @@ final class ImageSearchViewController: UICollectionViewController {
             return searchHeader
         }
         return dataSource
+    }
+
+    private func showSearchError(_ error: Error) {
+        let alert = UIAlertController(
+            title: "Search Error",
+            message: "An error in search occurred: \(error.localizedDescription)",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        Task { @MainActor in
+            present(alert, animated: true)
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

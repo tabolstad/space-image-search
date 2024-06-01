@@ -13,13 +13,14 @@ typealias ImageDataSourceSnapshot = NSDiffableDataSourceSnapshot<ImageSearchView
 final class ImageSearchViewModel: NSObject {
 
     var dataSource: ImageCollectionDataSource?
+    var showSearchError: ((Error) -> Void)?
 
     private var imageService: ImageService
 
     private let debounceTime: UInt64 = 500_000_000
-    private var searchQuery: String = "Mars"
-    var searchTopic: SearchTopic? = .title
+    private var searchQuery: String = ""
     private var searchTask: Task<Void, any Error>?
+    var searchTopic: SearchTopic? = .title
 
     init(imageService: ImageService) {
         self.imageService = imageService
@@ -32,8 +33,12 @@ final class ImageSearchViewModel: NSObject {
         searchTask = nil
         let newSearch = Task {
             try await Task.sleep(nanoseconds: debounceTime)
-            let images = try await imageService.search(query: searchQuery, searchTopic: searchTopic)
-            await replaceImages(images, animatingChange: true)
+            do {
+                let images = try await imageService.search(query: searchQuery, searchTopic: searchTopic)
+                await replaceImages(images, animatingChange: true)
+            } catch {
+                showSearchError?(error)
+            }
         }
         searchTask = newSearch
     }
