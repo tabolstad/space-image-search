@@ -13,23 +13,22 @@ final class ImageSearchViewController: UICollectionViewController {
         case all
     }
 
-    let searchBar = UISearchBar()
+    private static let headerSupplementaryViewKind = "HeaderSupplementaryView"
+    private static let searchHeaderReuseIdentifier = "SearchReuseIdentifier"
+    private static let imageCellReuseIdentifier = "ImageCollectionCell"
 
-    static let headerSupplementaryView = "HeaderSupplementaryView"
-    private static let searchReuseIdentifier = "SearchReuseIdentifier"
-    private static let imageReuseIdentifier = "ImageCollectionCell"
+    private static var columns: Int = 3
+    private static var itemHeight: CGFloat = 150
+    private static var itemSpacing: CGFloat = 4
+    private static var lineSpacing: CGFloat = 4
+    private static var contentInset: CGFloat = 16
+
+    let searchBar = UISearchBar()
 
     private let viewModel: ImageSearchViewModel
     private let imageService: ImageService
 
     private lazy var dataSource: ImageCollectionDataSource = buildDataSource()
-
-    private static var columns: Int = 3
-    private static var itemHeight: CGFloat = 150
-    private static var itemInset: CGFloat = 4
-    private static var itemSpacing: CGFloat = 4
-    private static var lineSpacing: CGFloat = 4
-    private static var contentInset: CGFloat = 16
 
     init(imageService: ImageService) {
 
@@ -39,16 +38,19 @@ final class ImageSearchViewController: UICollectionViewController {
 
         let layout = Self.makeLayout()
         super.init(collectionViewLayout: layout)
+
         viewModel.dataSource = dataSource
         
-        self.collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = UIColor.white
 
-        self.collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: Self.imageReuseIdentifier)
-        self.collectionView.register(SearchHeader.self,
-                                     forSupplementaryViewOfKind: Self.headerSupplementaryView,
-                                     withReuseIdentifier: Self.searchReuseIdentifier)
+        collectionView.register(ImageCollectionViewCell.self, 
+                                forCellWithReuseIdentifier: Self.imageCellReuseIdentifier)
 
-        self.title = "Space Image Search"
+        collectionView.register(SearchHeader.self,
+                                forSupplementaryViewOfKind: Self.headerSupplementaryViewKind,
+                                withReuseIdentifier: Self.searchHeaderReuseIdentifier)
+
+        title = "Space Image Search"
 
         viewModel.showSearchError = { [weak self] error in
             self?.showSearchError(error)
@@ -59,7 +61,7 @@ final class ImageSearchViewController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    static func makeLayout() -> UICollectionViewLayout {
+    private static func makeLayout() -> UICollectionViewLayout {
 
         // Image Items
         let itemSize = NSCollectionLayoutSize(
@@ -82,7 +84,7 @@ final class ImageSearchViewController: UICollectionViewController {
         )
         let searchHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
-            elementKind: Self.headerSupplementaryView,
+            elementKind: Self.headerSupplementaryViewKind,
             alignment: .top
         )
         searchHeader.pinToVisibleBounds = true
@@ -94,7 +96,6 @@ final class ImageSearchViewController: UICollectionViewController {
                                                         leading: contentInset,
                                                         bottom: contentInset,
                                                         trailing: contentInset)
-
         section.boundarySupplementaryItems = [searchHeader]
 
         let config = UICollectionViewCompositionalLayoutConfiguration()
@@ -107,18 +108,24 @@ final class ImageSearchViewController: UICollectionViewController {
 
     private func buildDataSource() -> ImageCollectionDataSource {
 
-        let dataSource = ImageCollectionDataSource(collectionView: self.collectionView) { [weak self] (collectionView, indexPath, spaceImage) -> UICollectionViewCell? in
+        // Images
+        let dataSource = ImageCollectionDataSource(collectionView: collectionView) { [weak self] (
+            collectionView,
+            indexPath,
+            spaceImage) -> UICollectionViewCell? in
+
             guard let self else {
                 return nil
             }
 
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.imageReuseIdentifier, for: indexPath) as! ImageCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.imageCellReuseIdentifier, for: indexPath) as! ImageCollectionViewCell
             cell.title.text = "\(spaceImage.title)"
             cell.previewUrl = spaceImage.thumbnail
             cell.fetchImage = self.viewModel.fetchImage
             return cell
         }
 
+        // Header View
         dataSource.supplementaryViewProvider = { [weak self] (
             collectionView: UICollectionView,
             kind: String,
@@ -129,13 +136,13 @@ final class ImageSearchViewController: UICollectionViewController {
             }
 
             let searchHeader = collectionView.dequeueReusableSupplementaryView(
-                ofKind: Self.headerSupplementaryView,
-                withReuseIdentifier: Self.searchReuseIdentifier,
-                for: indexPath) as? SearchHeader
+                ofKind: Self.headerSupplementaryViewKind,
+                withReuseIdentifier: Self.searchHeaderReuseIdentifier,
+                for: indexPath
+            ) as? SearchHeader
             searchHeader?.searchField.delegate = viewModel
             searchHeader?.categoryPicker.selectedSegmentIndex = viewModel.searchTopic?.rawValue ?? 0
-            searchHeader?.categoryPicker.addTarget(viewModel, action: #selector(ImageSearchViewModel.topicSelected(sender:)), for: .valueChanged)
-
+            searchHeader?.categoryPicker.addTarget(viewModel, action: #selector(ImageSearchViewModel.searchTopicSelected(sender:)), for: .valueChanged)
 
             return searchHeader
         }
@@ -153,6 +160,9 @@ final class ImageSearchViewController: UICollectionViewController {
             present(alert, animated: true)
         }
     }
+}
+
+extension ImageSearchViewController {
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
@@ -171,5 +181,19 @@ final class ImageSearchViewController: UICollectionViewController {
             thumbnail: thumbnail
         )
         navigationController?.pushViewController(detailViewController, animated: true)
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+        if isLastImage(collectionView, indexPath: indexPath) {
+            viewModel.loadNextPage()
+        }
+    }
+
+    private func isLastImage(_ collectionView: UICollectionView, indexPath: IndexPath) -> Bool {
+        let lastSectionIndex = collectionView.numberOfSections - 1
+        let lastItemIndex = collectionView.numberOfItems(inSection: lastSectionIndex) - 1
+        let lastIndex =  IndexPath(item: lastItemIndex, section: lastSectionIndex)
+        return indexPath == lastIndex
     }
 }

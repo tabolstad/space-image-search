@@ -12,6 +12,8 @@ enum APIError: Error {
     case badRequest
     case notFound
     case serverError
+    case urlFetchingError
+    case imageFetchingError
 }
 
 final class NASALibraryAPI {
@@ -40,6 +42,31 @@ final class NASALibraryAPI {
         return decoded
     }
 
+    func requestUrl<T: Decodable>(_ url: URL) async throws -> T {
+
+        let (data, response) = try await urlSession.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw APIError.urlFetchingError
+        }
+        let decoder = JSONDecoder()
+        let nextResponse = try decoder.decode(T.self, from: data)
+        return nextResponse
+    }
+
+    func fetchImageData(url: URL) async throws -> Data {
+
+        let (data, response) = try await urlSession.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw APIError.imageFetchingError
+        }
+
+        return data
+    }
+
     private func handleResponse(_ urlResponse: URLResponse) throws {
         guard let response = urlResponse as? HTTPURLResponse else {
             throw APIError.unexpectedResponse
@@ -59,11 +86,10 @@ final class NASALibraryAPI {
     }
 
     private func buildRequest(endpoint: NASAEndpoint) -> URLRequest {
-        
-        guard let baseURL = URL(string: apiConfiguration.baseURL) else {
-            fatalError("API base URL is misconfigured.")
-        }
+
+        let baseURL = apiConfiguration.baseURL
         let endpoint = endpoint.info
+
         var url = baseURL.appendingPathComponent(endpoint.path)
         if let query = endpoint.query {
             url.append(queryItems: query)

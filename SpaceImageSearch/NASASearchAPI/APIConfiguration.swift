@@ -8,7 +8,7 @@
 import Foundation
 
 struct APIConfiguration {
-    let baseURL: String
+    let baseURL: URL
 
-    static let nasa = APIConfiguration(baseURL: "https://images-api.nasa.gov")
+    static let nasa = APIConfiguration(baseURL: URL(safe: "https://images-api.nasa.gov"))
 }

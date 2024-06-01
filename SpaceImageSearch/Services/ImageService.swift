@@ -7,79 +7,77 @@
 
 import UIKit
 
-protocol ImageService {
-    func search(query: String, searchTopic: SearchTopic?) async throws -> [SpaceImage]
-    func fetchImage(url: URL) async throws -> UIImage
-}
-
-extension ImageService {
-    func fetchImage(url: URL) async throws -> UIImage {
-        let session = URLSession(configuration: .default)
-        let (data, response) = try await session.data(from: url)
-
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw ImageServiceError.imageFetchingError
-        }
-        guard let image = UIImage(data: data) else {
-            throw ImageServiceError.imageDataDecodingError
-        }
-        return image
-    }
-}
-
 enum ImageServiceError: Error {
     case imageFetchingError
     case imageDataDecodingError
 }
 
-enum SearchTopic: Int {
-    case title
-    case photographer
-    case location
-
-    var parameter: String {
-        switch self {
-        case .title:
-            "title"
-        case .photographer:
-            "photographer"
-        case .location:
-            "location"
-        }
-    }
-
-    static var freeTextSearch: String {
-        return "q"
-    }
+protocol ImageService {
+    func search(query: String, searchTopic: SearchTopic?) async throws -> ImageBatch
+    func fetchNextPage(url: URL) async throws -> ImageBatch
+    func fetchImage(url: URL) async throws -> UIImage
 }
 
 final class NASAImageService: ImageService {
 
     let api = NASALibraryAPI(config: .nasa)
 
-    func search(query: String, searchTopic: SearchTopic?) async throws -> [SpaceImage] {
+    func search(query: String, searchTopic: SearchTopic?) async throws -> ImageBatch {
         let searchTopic = searchTopic?.parameter ?? SearchTopic.freeTextSearch
         let query = URLQueryItem(name: searchTopic, value: query)
         do {
             let response: APISearchResponse = try await api.request(.search([query]))
-            let images = response.collection.items.compactMap {
-                SpaceImage(apiItem: $0)
-            }
-            return images
+            let batch = packageImageBatch(response: response)
+            return batch
         } catch {
             if let urlError = error as? URLError,
                urlError.code == URLError.Code.cancelled {
-                return []
+                return ImageBatch(images: [],
+                                  totalCount: 0,
+                                  next: nil)
             } else {
                 throw error
             }
         }
     }
+
+    func fetchNextPage(url: URL) async throws -> ImageBatch {
+        do {
+            let nextResponse: APISearchResponse = try await api.requestUrl(url)
+            let batch = packageImageBatch(response: nextResponse)
+            return batch
+        } catch {
+            return ImageBatch(images: [], totalCount: 0, next: nil)
+        }
+    }
+
+    private func packageImageBatch(response: APISearchResponse) -> ImageBatch {
+        let images = response.collection.items.compactMap {
+            SpaceImage(apiItem: $0)
+        }
+        let totalCount = response.collection.metadata?.total_hits ?? 0
+        let nextPage = response.collection.links?
+            .first(where: { $0.rel == "next" })
+            .flatMap { URL(string: $0.href.replacingOccurrences(of: "http", with: "https")) }
+        let batch = ImageBatch(images: images,
+                               totalCount: totalCount,
+                               next: nextPage)
+        return batch
+    }
+
+    func fetchImage(url: URL) async throws -> UIImage {
+
+        let imageData = try await api.fetchImageData(url: url)
+        guard let image = UIImage(data: imageData) else {
+            throw ImageServiceError.imageDataDecodingError
+        }
+        return image
+    }
 }
 
 #if DEBUG
 final class MockImageService: ImageService {
+
     func search(query: String, searchTopic: SearchTopic?) async throws -> [SpaceImage] {
         let images = [
             SpaceImage(id: "A",
@@ -109,14 +107,17 @@ final class MockImageService: ImageService {
         ]
         return images
     }
-}
 
-extension URL {
-    init(safe: String) {
-        guard let url = URL(string: safe) else {
-            fatalError("Safe URL is misconfigured: \(safe)")
-        }
-        self = url
+    func fetchNextPage(url: URL) async throws -> ImageBatch {
+        return ImageBatch(images: [], totalCount: 0, next: nil)
+    }
+
+    func search(query: String, searchTopic: SearchTopic?) async throws -> ImageBatch {
+        return ImageBatch(images: [], totalCount: 0, next: nil)
+    }
+
+    func fetchImage(url: URL) async throws -> UIImage {
+        return UIImage(systemName: "person")!
     }
 }
 #endif

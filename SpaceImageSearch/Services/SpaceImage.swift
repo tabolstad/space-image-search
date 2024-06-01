@@ -43,3 +43,21 @@ extension SpaceImage {
         }
     }
 }
+
+extension SpaceImage {
+    static var mockLongStrings: SpaceImage {
+        let description = "Rover team members with the Mars Exploration Rover. Rover team members with the Mars Exploration Rover. Rover team members with the Mars Exploration Rover. Rover team members with the Mars Exploration Rover. Rover team members with the Mars Exploration Rover. Rover team members with the Mars Exploration Rover."
+
+        let location = "Jet Propulsion Laboratory, Jet Propulsion Laboratory, Jet Propulsion Laboratory"
+        let photographer = "Bob The Photographer Bob The Photographer Bob The Photographer"
+        let title = "Rover Team Rover Team Rover Team Rover Team"
+
+        let spaceImage = SpaceImage(id: "A",
+                                    description: description,
+                                    location: location,
+                                    photographer: photographer,
+                                    thumbnail: URL(safe: "https://images-assets.nasa.gov/image/PIA04826/PIA04826~thumb.jpg"),
+                                    title: title)
+        return spaceImage
+    }
+}

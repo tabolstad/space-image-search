@@ -13,29 +13,48 @@ typealias ImageDataSourceSnapshot = NSDiffableDataSourceSnapshot<ImageSearchView
 final class ImageSearchViewModel: NSObject {
 
     var dataSource: ImageCollectionDataSource?
+    var searchTopic: SearchTopic? = .title
     var showSearchError: ((Error) -> Void)?
 
     private var imageService: ImageService
 
-    private let debounceTime: UInt64 = 500_000_000
+    // Search
+    private let searchDebounceTime: UInt64 = 500_000_000
     private var searchQuery: String = ""
     private var searchTask: Task<Void, any Error>?
-    var searchTopic: SearchTopic? = .title
+    // Pagination
+    private var currentImages: [SpaceImage] = []
+    private var nextPage: URL?
+    private var totalFoundCount: Int = 0
 
     init(imageService: ImageService) {
         self.imageService = imageService
         super.init()
-        updateSnapshot(animatingChange: false)
+        clearImages(animatingChange: false)
     }
 
-    func updateSnapshot(animatingChange: Bool) {
+    func loadNextPage() {
+        guard let nextPage else {
+            return
+        }
+        Task {
+            let batch = try await self.imageService.fetchNextPage(url: nextPage)
+            await appendImages(batch, animatingChange: true)
+        }
+    }
+
+    private func performSearchTask(query: String,
+                                   topic: SearchTopic?,
+                                   animatingChange: Bool) {
+
         searchTask?.cancel()
         searchTask = nil
+        
         let newSearch = Task {
-            try await Task.sleep(nanoseconds: debounceTime)
+            try await Task.sleep(nanoseconds: searchDebounceTime)
             do {
-                let images = try await imageService.search(query: searchQuery, searchTopic: searchTopic)
-                await replaceImages(images, animatingChange: true)
+                let batch = try await imageService.search(query: query, searchTopic: topic)
+                await replaceImages(batch, animatingChange: true)
             } catch {
                 showSearchError?(error)
             }
@@ -43,21 +62,42 @@ final class ImageSearchViewModel: NSObject {
         searchTask = newSearch
     }
 
-    @MainActor
-    private func replaceImages(_ images: [SpaceImage], animatingChange: Bool) {
-        var snapshot = ImageDataSourceSnapshot()
-        snapshot.appendSections([.all])
-        snapshot.appendItems(images, toSection: .all)
 
-        dataSource?.apply(snapshot, animatingDifferences: animatingChange)
+    private func clearImages(animatingChange: Bool = true) {
+
+        currentImages = []
+        totalFoundCount = 0
+        nextPage = nil
+        Task {
+            await applySnapshot(images: currentImages, animatingChange: animatingChange)
+        }
     }
 
     @MainActor
-    private func appendImages(_ images: [SpaceImage], animatingChange: Bool) {
+    private func replaceImages(_ imageBatch: ImageBatch, animatingChange: Bool) {
+
+        currentImages = imageBatch.images
+        totalFoundCount = imageBatch.totalCount
+        nextPage = imageBatch.next
+        applySnapshot(images: currentImages, animatingChange: animatingChange)
+    }
+
+
+    @MainActor
+    private func appendImages(_ imageBatch: ImageBatch, animatingChange: Bool) {
+
+        currentImages.append(contentsOf: imageBatch.images)
+        totalFoundCount = imageBatch.totalCount
+        nextPage = imageBatch.next
+        applySnapshot(images: currentImages, animatingChange: animatingChange)
+    }
+
+    @MainActor
+    private func applySnapshot(images: [SpaceImage], animatingChange: Bool) {
+        
         var snapshot = ImageDataSourceSnapshot()
         snapshot.appendSections([.all])
         snapshot.appendItems(images, toSection: .all)
-
         dataSource?.apply(snapshot, animatingDifferences: animatingChange)
     }
 
@@ -66,7 +106,7 @@ final class ImageSearchViewModel: NSObject {
     }
 
     @objc
-    func topicSelected(sender: AnyObject) {
+    func searchTopicSelected(sender: AnyObject) {
         if let sender = sender as? UISegmentedControl,
            let topic = SearchTopic(rawValue: sender.selectedSegmentIndex) {
             searchTopic = topic
@@ -83,7 +123,16 @@ extension ImageSearchViewModel: UISearchTextFieldDelegate, UITextFieldDelegate {
         guard newQuery != searchQuery else {
             return
         }
-        searchQuery = newQuery ?? ""
-        updateSnapshot(animatingChange: true)
+        guard let newQuery else {
+            return
+        }
+        if newQuery == "" {
+            clearImages()
+            return
+        }
+        searchQuery = newQuery
+        performSearchTask(query: newQuery,
+                          topic: searchTopic,
+                          animatingChange: true)
     }
 }
