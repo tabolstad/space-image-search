@@ -11,17 +11,18 @@ final class ImageDetailView: UIView {
 
     let viewModel: ImageDetailViewModel
 
+    let scrollView = UIScrollView()
+
     let stackView = UIStackView()
     let image = UIImageView()
     let title = UILabel()
     let location = UILabel()
     let photographer = UILabel()
     let imageDescription = UILabel()
-    let spacer = UIView()
 
-    let padding: CGFloat = 20.0
     let lineSpacing: CGFloat = 10.0
     let imageCorner: CGFloat = 10.0
+    let scrollContentMargin: CGFloat = 16.0
 
     static let placeholder = UIImage(systemName: "moon.stars")!
 
@@ -51,8 +52,8 @@ final class ImageDetailView: UIView {
 
         title.numberOfLines = -1
         imageDescription.numberOfLines = -1
-
-        spacer.isAccessibilityElement = false
+        location.numberOfLines = -1
+        photographer.numberOfLines = -1
 
         refreshData()
         setupViewLayout()
@@ -70,43 +71,52 @@ final class ImageDetailView: UIView {
         image.image = viewModel.thumbnail ?? Self.placeholder
     }
 
-    @MainActor
-    private func applyImage(_ image: UIImage) {
-        self.image.image = image
-    }
-
     private func setupViewLayout() {
 
-        addSubview(stackView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
-        let views = [
+        addSubview(scrollView)
+        scrollView.addSubview(stackView)
+
+        let viewsInStack = [
             title,
             image,
             location,
             photographer,
-            imageDescription,
-            spacer
+            imageDescription
         ]
-        views.forEach { view in
+        viewsInStack.forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
             stackView.addArrangedSubview(view)
         }
 
+        title.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        title.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
         let constraints = [
-            stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: padding),
-            stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -padding),
-            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: padding),
-            stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            image.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            title.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            location.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            photographer.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            imageDescription.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: scrollContentMargin),
+            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -scrollContentMargin),
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: (-2.0 * scrollContentMargin)),
 
-            spacer.heightAnchor.constraint(greaterThanOrEqualToConstant: 20),            
-            image.heightAnchor.constraint(equalTo: image.widthAnchor)
+            title.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            title.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            image.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            image.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            image.heightAnchor.constraint(equalTo: stackView.widthAnchor),
+            location.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            location.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            photographer.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            photographer.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            imageDescription.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            imageDescription.trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
