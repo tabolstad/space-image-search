@@ -61,11 +61,20 @@ final class NASAImageService: ImageService {
     func search(query: String, searchTopic: SearchTopic?) async throws -> [SpaceImage] {
         let searchTopic = searchTopic?.parameter ?? SearchTopic.freeTextSearch
         let query = URLQueryItem(name: searchTopic, value: query)
-        let response: APISearchResponse = try await api.request(.search([query]))
-        let images = response.collection.items.compactMap {
-            SpaceImage(apiItem: $0)
+        do {
+            let response: APISearchResponse = try await api.request(.search([query]))
+            let images = response.collection.items.compactMap {
+                SpaceImage(apiItem: $0)
+            }
+            return images
+        } catch {
+            if let urlError = error as? URLError,
+               urlError.code == URLError.Code.cancelled {
+                return []
+            } else {
+                throw error
+            }
         }
-        return images
     }
 }
 
