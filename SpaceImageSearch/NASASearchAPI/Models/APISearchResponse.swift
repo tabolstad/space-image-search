@@ -15,8 +15,8 @@ struct APICollection: Decodable {
     let version: String
     let href: String
     let items: [APIItem]
-    let metadata: APIMetadata
-    let links: [APILink]
+    let metadata: APIMetadata?
+    let links: [APILink]?
 }
 
 struct APIItem: Decodable {
@@ -30,9 +30,9 @@ struct APIDataItem: Decodable {
 
     let center: String
     let date_created: String
-    let description: String
-    let keywords: [String]
-    let media_type: String
+    let description: String?
+    let keywords: [String]?
+    let media_type: String?
     let title: String
 
     let location: String?

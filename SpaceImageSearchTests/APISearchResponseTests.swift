@@ -15,8 +15,8 @@ final class APISearchResponseTests: XCTestCase {
         let response: APISearchResponse = try TestData.json("nasa_search_response")
         let collection = response.collection
         XCTAssertEqual(collection.version, "1.0")
-        XCTAssertEqual(collection.metadata.total_hits, 7522)
-        XCTAssertEqual(collection.links.first?.rel, "next")
+        XCTAssertEqual(collection.metadata?.total_hits, 7522)
+        XCTAssertEqual(collection.links?.first?.rel, "next")
 
         let items = collection.items
         let item = items[0]
@@ -39,6 +39,9 @@ final class APISearchResponseTests: XCTestCase {
         XCTAssertNil(data.location)
         XCTAssertNil(data.photographer)
         XCTAssertNil(data.secondary_creator)
+        XCTAssertNil(data.keywords)
+        XCTAssertNil(data.media_type)
+
         XCTAssertNil(item.links)
     }
 }
