@@ -119,6 +119,7 @@ extension ImageSearchViewController {
             viewModel.updateSearchField = { searchString in
                 searchHeader?.searchString = searchString
             }
+            self.searchHeader = searchHeader
 
             return searchHeader
         }

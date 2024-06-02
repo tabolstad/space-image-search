@@ -18,6 +18,7 @@ final class ImageSearchViewController: UICollectionViewController {
     let viewModel: ImageSearchViewModel
     private let imageService: ImageService
     private var noResultsView: NoResultsMessageView?
+    var searchHeader: SearchHeader?
 
     private lazy var dataSource: ImageCollectionDataSource = buildDataSource()
 
@@ -65,6 +66,8 @@ final class ImageSearchViewController: UICollectionViewController {
     func updateContentForResult() {
         if viewModel.currentImages.isEmpty {
 
+            searchHeader?.searchField.becomeFirstResponder()
+
             if noResultsView == nil {
                 let noResultsView = NoResultsMessageView()
                 self.noResultsView = noResultsView
@@ -88,6 +91,8 @@ final class ImageSearchViewController: UICollectionViewController {
                 noResultsView.setMessage(.noResultsFound)
             }
         } else {
+
+            searchHeader?.searchField.resignFirstResponder()
             noResultsView?.removeFromSuperview()
             noResultsView = nil
         }
