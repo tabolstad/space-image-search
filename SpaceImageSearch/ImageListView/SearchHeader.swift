@@ -35,6 +35,7 @@ final class SearchHeader: UICollectionReusableView {
         searchField.autocorrectionType = .no
         searchField.autocapitalizationType = .none
         searchField.spellCheckingType = .no
+        searchField.returnKeyType = .search
 
         categoryPicker.isMomentary = false
         categoryPicker.insertSegment(with: UIImage(systemName: "doc.text.magnifyingglass"),

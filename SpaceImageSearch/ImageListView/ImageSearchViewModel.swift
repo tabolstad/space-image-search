@@ -27,8 +27,7 @@ final class ImageSearchViewModel: NSObject {
             didUpdateSearchTopic()
         }
     }
-    private let searchDebounceTime: UInt64 = 500_000_000
-    private var searchTask: Task<Void, any Error>?
+    private var searchTask: Task<Void, Never>?
     // Pagination
     var currentImages: [SpaceImage] = [] {
         didSet {
@@ -62,7 +61,6 @@ final class ImageSearchViewModel: NSObject {
         searchTask = nil
         
         let newSearch = Task {
-            try await Task.sleep(nanoseconds: searchDebounceTime)
             do {
                 let batch = try await imageService.search(query: query, searchTopic: topic)
                 await replaceImages(batch, animatingChange: true)
@@ -151,22 +149,22 @@ final class ImageSearchViewModel: NSObject {
 
 extension ImageSearchViewModel: UISearchTextFieldDelegate, UITextFieldDelegate {
 
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let newQuery = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard newQuery != searchQuery else {
-            return
-        }
         guard let newQuery else {
-            return
+            return false
+        }
+        guard newQuery != searchQuery else {
+            return false
         }
         searchQuery = newQuery
         if newQuery == "" {
             clearImages()
-            return
+            return false
         }
         performSearchTask(query: newQuery,
                           topic: searchTopic,
                           animatingChange: true)
+        return true
     }
 }
