@@ -19,6 +19,12 @@ final class ImageDetailViewController: UIViewController {
         )
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        viewModel.showZoomView = { [weak self] in
+            self?.showZoomView()
+        }
+        viewModel.closeZoomView = { [weak self] in
+            self?.closeZoomView()
+        }
     }
 
     override func loadView() {
@@ -27,5 +33,15 @@ final class ImageDetailViewController: UIViewController {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func showZoomView() {
+        let zoomViewController = ImageZoomViewController(viewModel: viewModel)
+        zoomViewController.modalPresentationStyle = .fullScreen
+        present(zoomViewController, animated: true)
+    }
+
+    func closeZoomView() {
+        presentedViewController?.dismiss(animated: true)
     }
 }

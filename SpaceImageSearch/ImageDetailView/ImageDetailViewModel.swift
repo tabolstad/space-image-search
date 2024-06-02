@@ -13,7 +13,9 @@ final class ImageDetailViewModel {
     let imageService: ImageService
     let thumbnail: UIImage?
 
-    internal init(spaceImage: SpaceImage, imageService: ImageService, thumbnail: UIImage?) {
+    internal init(spaceImage: SpaceImage, 
+                  imageService: ImageService,
+                  thumbnail: UIImage?) {
         self.spaceImage = spaceImage
         self.imageService = imageService
         self.thumbnail = thumbnail
@@ -34,6 +36,9 @@ final class ImageDetailViewModel {
     var imageDescription: String {
         return spaceImage.description
     }
+
+    var showZoomView: (() -> Void)?
+    var closeZoomView: (() -> Void)?
 
     func fetchImage() async throws -> UIImage {
         let url = spaceImage.thumbnail

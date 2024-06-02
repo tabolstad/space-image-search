@@ -19,17 +19,19 @@ final class ImageDetailView: UIView {
     let location = UILabel()
     let photographer = UILabel()
     let imageDescription = UILabel()
+    let zoomButton = UIButton()
 
     let lineSpacing: CGFloat = 10.0
     let imageCorner: CGFloat = 10.0
     let scrollContentMargin: CGFloat = 16.0
+    let zoomButtonSize: CGFloat = 44.0
 
     static let placeholder = UIImage(systemName: "moon.stars")!
 
     init(viewModel: ImageDetailViewModel) {
 
         self.viewModel = viewModel
-        
+
         super.init(frame: .zero)
 
         self.backgroundColor = UIColor.viewBackground
@@ -50,6 +52,13 @@ final class ImageDetailView: UIView {
         photographer.font = UIFont.preferredFont(forTextStyle: .body)
         photographer.textColor = UIColor.gray
         imageDescription.font = UIFont.preferredFont(forTextStyle: .body)
+
+        let zoomButtonConfig = UIButton.Configuration.imageButton("magnifyingglass.circle.fill")       
+        let zoomAction = UIAction { [weak self] _ in
+            self?.viewModel.showZoomView?()
+        }
+        zoomButton.configuration = zoomButtonConfig
+        zoomButton.addAction(zoomAction, for: .touchUpInside)
 
         title.numberOfLines = -1
         imageDescription.numberOfLines = -1
@@ -76,6 +85,7 @@ final class ImageDetailView: UIView {
 
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        zoomButton.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(scrollView)
         scrollView.addSubview(stackView)
@@ -91,6 +101,7 @@ final class ImageDetailView: UIView {
             view.translatesAutoresizingMaskIntoConstraints = false
             stackView.addArrangedSubview(view)
         }
+        addSubview(zoomButton)
 
         title.setContentHuggingPriority(.defaultLow, for: .horizontal)
         title.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -117,7 +128,12 @@ final class ImageDetailView: UIView {
             photographer.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             photographer.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             imageDescription.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            imageDescription.trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
+            imageDescription.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+
+            zoomButton.trailingAnchor.constraint(equalTo: image.trailingAnchor),
+            zoomButton.topAnchor.constraint(equalTo: image.topAnchor),
+            zoomButton.heightAnchor.constraint(equalToConstant: zoomButtonSize),
+            zoomButton.widthAnchor.constraint(equalToConstant: zoomButtonSize)
         ]
         NSLayoutConstraint.activate(constraints)
     }

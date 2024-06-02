@@ -19,6 +19,8 @@
 		142DE4CE2C08F1B3001043CB /* APISearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */; };
 		142DE4D02C08F92A001043CB /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CF2C08F92A001043CB /* TestData.swift */; };
 		144E81792C0CFAC500CD3B80 /* ImageSearchViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E81782C0CFAC500CD3B80 /* ImageSearchViewController+Layout.swift */; };
+		144E817C2C0D032000CD3B80 /* ImageZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E817B2C0D032000CD3B80 /* ImageZoomView.swift */; };
+		144E817E2C0D11EA00CD3B80 /* UIButton+ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E817D2C0D11EA00CD3B80 /* UIButton+ImageButton.swift */; };
 		14BCB87E2C0B405A00B9360B /* ImageBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BCB87D2C0B405A00B9360B /* ImageBatch.swift */; };
 		14BCB8802C0B409E00B9360B /* SearchTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BCB87F2C0B409E00B9360B /* SearchTopic.swift */; };
 		14C859F62C0B4E090015584E /* URL+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C859F52C0B4E090015584E /* URL+Safe.swift */; };
@@ -65,6 +67,8 @@
 		142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISearchResponse.swift; sourceTree = "<group>"; };
 		142DE4CF2C08F92A001043CB /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		144E81782C0CFAC500CD3B80 /* ImageSearchViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageSearchViewController+Layout.swift"; sourceTree = "<group>"; };
+		144E817B2C0D032000CD3B80 /* ImageZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomView.swift; sourceTree = "<group>"; };
+		144E817D2C0D11EA00CD3B80 /* UIButton+ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ImageButton.swift"; sourceTree = "<group>"; };
 		14BCB87D2C0B405A00B9360B /* ImageBatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBatch.swift; sourceTree = "<group>"; };
 		14BCB87F2C0B409E00B9360B /* SearchTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTopic.swift; sourceTree = "<group>"; };
 		14C859F52C0B4E090015584E /* URL+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Safe.swift"; sourceTree = "<group>"; };
@@ -185,6 +189,8 @@
 				14D768B42C0A2DAB003A89FE /* ImageDetailView.swift */,
 				14D768B62C0A2DB2003A89FE /* ImageDetailViewController.swift */,
 				14D768B82C0A2DB8003A89FE /* ImageDetailViewModel.swift */,
+				144E817B2C0D032000CD3B80 /* ImageZoomView.swift */,
+				144E817D2C0D11EA00CD3B80 /* UIButton+ImageButton.swift */,
 			);
 			path = ImageDetailView;
 			sourceTree = "<group>";
@@ -330,7 +336,9 @@
 				14E9E6002C0922E200E0E9B4 /* ImageSearchViewModel.swift in Sources */,
 				14D768B52C0A2DAB003A89FE /* ImageDetailView.swift in Sources */,
 				14E9E5E12C09062C00E0E9B4 /* NASALibraryAPI.swift in Sources */,
+				144E817C2C0D032000CD3B80 /* ImageZoomView.swift in Sources */,
 				1414402F2C0CC43900F5D19F /* NoResultsMessageView.swift in Sources */,
+				144E817E2C0D11EA00CD3B80 /* UIButton+ImageButton.swift in Sources */,
 				14E9E5F22C091AD800E0E9B4 /* ImageService.swift in Sources */,
 				14E9E5E52C090A5700E0E9B4 /* NASAEndpoint.swift in Sources */,
 				144E81792C0CFAC500CD3B80 /* ImageSearchViewController+Layout.swift in Sources */,
