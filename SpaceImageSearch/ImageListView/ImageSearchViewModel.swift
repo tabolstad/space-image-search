@@ -124,13 +124,13 @@ final class ImageSearchViewModel: NSObject {
     private func didUpdateSearchTopic() {
         let placeholder = switch searchTopic {
         case .title:
-            "Search Image Title"
+            "SearchHeader.Placeholder.Title".localized
         case .photographer:
-            "Search Photographer Name"
+            "SearchHeader.Placeholder.Photo".localized
         case .location:
-            "Search Location"
+            "SearchHeader.Placeholder.Location".localized
         case nil:
-            "Search for NASA Images"
+            "SearchHeader.Placeholder.Default".localized
         }
         updateSearchPlacehoder?(placeholder)
     }

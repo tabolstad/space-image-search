@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1414402B2C0CB6FA00F5D19F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1414402A2C0CB6FA00F5D19F /* Localizable.xcstrings */; };
+		1414402D2C0CB82700F5D19F /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414402C2C0CB82700F5D19F /* String+Localized.swift */; };
 		142DE4992C08D2D8001043CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4982C08D2D8001043CB /* AppDelegate.swift */; };
 		142DE49B2C08D2D8001043CB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE49A2C08D2D8001043CB /* SceneDelegate.swift */; };
 		142DE4A22C08D2D9001043CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4A12C08D2D9001043CB /* Assets.xcassets */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1414402A2C0CB6FA00F5D19F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		1414402C2C0CB82700F5D19F /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		142DE4952C08D2D8001043CB /* SpaceImageSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceImageSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		142DE4982C08D2D8001043CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		142DE49A2C08D2D8001043CB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +98,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		141440292C0CB6DA00F5D19F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				142DE4A12C08D2D9001043CB /* Assets.xcassets */,
+				1414402A2C0CB6FA00F5D19F /* Localizable.xcstrings */,
+				1414402C2C0CB82700F5D19F /* String+Localized.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		142DE48C2C08D2D8001043CB = {
 			isa = PBXGroup;
 			children = (
@@ -122,7 +136,7 @@
 				14E9E5FC2C09221300E0E9B4 /* ImageListView */,
 				14E9E5F02C091AC700E0E9B4 /* Services */,
 				142DE4C82C08DB52001043CB /* NASASearchAPI */,
-				142DE4A12C08D2D9001043CB /* Assets.xcassets */,
+				141440292C0CB6DA00F5D19F /* Resources */,
 				142DE4A32C08D2D9001043CB /* LaunchScreen.storyboard */,
 				142DE4A62C08D2D9001043CB /* Info.plist */,
 			);
@@ -284,6 +298,7 @@
 			files = (
 				142DE4A22C08D2D9001043CB /* Assets.xcassets in Resources */,
 				142DE4A52C08D2D9001043CB /* Base in Resources */,
+				1414402B2C0CB6FA00F5D19F /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +331,7 @@
 				14D768B72C0A2DB2003A89FE /* ImageDetailViewController.swift in Sources */,
 				14E9E5E32C09087C00E0E9B4 /* HTTPMethod.swift in Sources */,
 				14CF8A4F2C0A5EF1001C4441 /* SearchHeader.swift in Sources */,
+				1414402D2C0CB82700F5D19F /* String+Localized.swift in Sources */,
 				142DE4992C08D2D8001043CB /* AppDelegate.swift in Sources */,
 				14BCB8802C0B409E00B9360B /* SearchTopic.swift in Sources */,
 				142DE49B2C08D2D8001043CB /* SceneDelegate.swift in Sources */,

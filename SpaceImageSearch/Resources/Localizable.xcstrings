@@ -1,0 +1,102 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "SearchErrorAlert.Button" : {
+      "comment" : "Alert shown when a search error occurs.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "SearchErrorAlert.Message" : {
+      "comment" : "Alert shown when a search error occurs.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error in search occurred: %@"
+          }
+        }
+      }
+    },
+    "SearchErrorAlert.Title" : {
+      "comment" : "Alert shown when a search error occurs.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Error"
+          }
+        }
+      }
+    },
+    "SearchHeader.Placeholder.Default" : {
+      "comment" : "Search placeholder shown when search topic is not selected.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for NASA Images"
+          }
+        }
+      }
+    },
+    "SearchHeader.Placeholder.Location" : {
+      "comment" : "Search placeholder shown when search topic is location.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Location"
+          }
+        }
+      }
+    },
+    "SearchHeader.Placeholder.Photo" : {
+      "comment" : "Search placeholder shown when search topic is photographer.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Photographer Name"
+          }
+        }
+      }
+    },
+    "SearchHeader.Placeholder.Title" : {
+      "comment" : "Search placeholder shown when search topic is title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Image Title"
+          }
+        }
+      }
+    },
+    "SearchScreen.Title" : {
+      "comment" : "Title shown by search screen view controller.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\"Space Image Search\""
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

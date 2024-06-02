@@ -41,7 +41,7 @@ final class ImageSearchViewController: UICollectionViewController {
 
         viewModel.dataSource = dataSource
         
-        collectionView.backgroundColor = UIColor(named: "ViewBackground")
+        collectionView.backgroundColor = UIColor.viewBackground
 
         collectionView.register(ImageCollectionViewCell.self, 
                                 forCellWithReuseIdentifier: Self.imageCellReuseIdentifier)
@@ -50,7 +50,7 @@ final class ImageSearchViewController: UICollectionViewController {
                                 forSupplementaryViewOfKind: Self.headerSupplementaryViewKind,
                                 withReuseIdentifier: Self.searchHeaderReuseIdentifier)
 
-        title = "Space Image Search"
+        title = "SearchScreen.Title".localized
 
         viewModel.showSearchError = { [weak self] error in
             self?.showSearchError(error)
@@ -61,9 +61,10 @@ final class ImageSearchViewController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        viewModel.searchTopic = .location
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.viewModel.searchTopic = .location
+        showSearchError(APIError.unexpectedResponse)
     }
 
     private static func makeLayout() -> UICollectionViewLayout {
@@ -158,12 +159,13 @@ final class ImageSearchViewController: UICollectionViewController {
     }
 
     private func showSearchError(_ error: Error) {
+
         let alert = UIAlertController(
-            title: "Search Error",
-            message: "An error in search occurred: \(error.localizedDescription)",
+            title: "SearchErrorAlert.Title".localized,
+            message: "SearchErrorAlert.Message".localized(error.localizedDescription),
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "SearchErrorAlert.Button".localized, style: .cancel, handler: nil))
         Task { @MainActor in
             present(alert, animated: true)
         }
