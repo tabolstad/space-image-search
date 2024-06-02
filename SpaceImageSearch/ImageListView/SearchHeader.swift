@@ -26,6 +26,9 @@ final class SearchHeader: UICollectionReusableView {
         super.init(frame: .zero)
         
         searchField.backgroundColor = UIColor.searchBarBackground
+        searchField.autocorrectionType = .no
+        searchField.autocapitalizationType = .none
+        searchField.spellCheckingType = .no
 
         categoryPicker.isMomentary = false
         categoryPicker.insertSegment(with: UIImage(systemName: "doc.text.magnifyingglass"),
