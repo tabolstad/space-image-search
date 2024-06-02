@@ -98,6 +98,10 @@ final class ImageSearchViewModel: NSObject {
     @MainActor
     private func appendImages(_ imageBatch: ImageBatch, animatingChange: Bool) {
 
+        guard !imageBatch.images.isEmpty else {
+            return
+        }
+
         currentImages.append(contentsOf: imageBatch.images)
         totalFoundCount = imageBatch.totalCount
         nextPage = imageBatch.next

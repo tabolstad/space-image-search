@@ -21,8 +21,10 @@ protocol ImageService {
 final class NASAImageService: ImageService {
 
     let api = NASALibraryAPI(config: .nasa)
+    var nextPages = Set<URL>()
 
     func search(query: String, searchTopic: SearchTopic?) async throws -> ImageBatch {
+        nextPages = []
         let searchTopic = searchTopic?.parameter ?? SearchTopic.freeTextSearch
         let query = URLQueryItem(name: searchTopic, value: query)
         do {
@@ -42,6 +44,10 @@ final class NASAImageService: ImageService {
     }
 
     func fetchNextPage(url: URL) async throws -> ImageBatch {
+        guard !nextPages.contains(url) else {
+            return ImageBatch(images: [], totalCount: 0, next: nil)
+        }
+        nextPages.insert(url)
         do {
             let nextResponse: APISearchResponse = try await api.requestUrl(url)
             let batch = packageImageBatch(response: nextResponse)
