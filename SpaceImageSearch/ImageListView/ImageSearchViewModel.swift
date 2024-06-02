@@ -171,4 +171,10 @@ extension ImageSearchViewModel: UISearchTextFieldDelegate, UITextFieldDelegate {
                           animatingChange: true)
         return true
     }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        searchQuery = ""
+        clearImages()
+        return true
+    }
 }
