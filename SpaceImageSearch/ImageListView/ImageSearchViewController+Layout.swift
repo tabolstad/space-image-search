@@ -11,6 +11,12 @@ import UIKit
 
 extension ImageSearchViewController {
 
+    private static var columns: Int = 3
+    private static var itemFractionalHeight: CGFloat = 1.0 / 5.0
+    private static var itemSpacing: CGFloat = 6
+    private static var lineSpacing: CGFloat = 0
+    private static var contentInset: CGFloat = 16
+
     private static let headerSupplementaryViewKind = "HeaderSupplementaryView"
     private static let searchHeaderReuseIdentifier = "SearchReuseIdentifier"
     private static let imageCellReuseIdentifier = "ImageCollectionCell"
@@ -29,13 +35,13 @@ extension ImageSearchViewController {
         // Image Items
         let itemSize = NSCollectionLayoutSize(
             widthDimension: NSCollectionLayoutDimension.fractionalWidth(1.0 / CGFloat(columns)),
-            heightDimension: NSCollectionLayoutDimension.uniformAcrossSiblings(estimate: itemHeight)
+            heightDimension: NSCollectionLayoutDimension.uniformAcrossSiblings(estimate: 500)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: NSCollectionLayoutDimension.uniformAcrossSiblings(estimate: itemHeight)
+            heightDimension: NSCollectionLayoutDimension.fractionalHeight(itemFractionalHeight)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: columns)
         group.interItemSpacing = NSCollectionLayoutSpacing.fixed(itemSpacing)

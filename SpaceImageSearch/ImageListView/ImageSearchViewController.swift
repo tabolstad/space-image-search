@@ -13,12 +13,6 @@ final class ImageSearchViewController: UICollectionViewController {
         case all
     }
 
-    static var columns: Int = 3
-    static var itemHeight: CGFloat = 150
-    static var itemSpacing: CGFloat = 4
-    static var lineSpacing: CGFloat = 4
-    static var contentInset: CGFloat = 16
-
     let searchBar = UISearchBar()
 
     let viewModel: ImageSearchViewModel

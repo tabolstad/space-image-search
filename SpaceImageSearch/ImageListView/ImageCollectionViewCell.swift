@@ -12,8 +12,8 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     let preview = UIImageView()
     let title = UILabel()
     
-    let padding: CGFloat = 10.0
-    let spacing: CGFloat = 10.0
+    let padding: CGFloat = 8.0
+    let spacing: CGFloat = 8.0
     let cellCornerRadius: CGFloat = 10.0
     let imageCornerRadius: CGFloat = 8.0
 
