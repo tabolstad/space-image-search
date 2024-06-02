@@ -7,6 +7,7 @@
 import UIKit
 
 enum NoResultsMessage: String {
+    case inProgress
     case noResultsFound
     case newSearch
 
@@ -16,6 +17,8 @@ enum NoResultsMessage: String {
             "SearchScreen.NoResultsFoundMessage".localized
         case .newSearch:
             "SearchScreen.NewSearchMessage".localized
+        case .inProgress:
+            ""
         }
     }
 }
@@ -23,6 +26,7 @@ enum NoResultsMessage: String {
 final class NoResultsMessageView: UIView {
 
     let message = UILabel()
+    let progress = UIActivityIndicatorView()
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -31,6 +35,9 @@ final class NoResultsMessageView: UIView {
         message.textAlignment = .center
         message.font = UIFont.preferredFont(forTextStyle: .title2)
         message.textColor = UIColor.lightGray
+        progress.isHidden = true
+        message.isHidden = true
+
         isUserInteractionEnabled = false
         setupViewLayout()
     }
@@ -38,19 +45,35 @@ final class NoResultsMessageView: UIView {
     private func setupViewLayout() {
 
         message.translatesAutoresizingMaskIntoConstraints = false
+        progress.translatesAutoresizingMaskIntoConstraints = false
         addSubview(message)
+        addSubview(progress)
 
         let constraints = [
             message.leadingAnchor.constraint(equalTo: leadingAnchor),
             message.trailingAnchor.constraint(equalTo: trailingAnchor),
             message.topAnchor.constraint(equalTo: topAnchor),
             message.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            progress.centerXAnchor.constraint(equalTo: centerXAnchor),
+            progress.centerYAnchor.constraint(equalTo: centerYAnchor),
+            progress.widthAnchor.constraint(equalToConstant: 100),
+            progress.heightAnchor.constraint(equalToConstant: 100)
         ]
         NSLayoutConstraint.activate(constraints)
     }
 
-    func setMessage(_ message: NoResultsMessage) {
-        self.message.text = message.display
+    func setMessage(_ messageType: NoResultsMessage) {
+        switch messageType {
+        case .inProgress:
+            progress.isHidden = false
+            message.isHidden = true
+            progress.startAnimating()
+        case .noResultsFound, .newSearch:
+            progress.isHidden = true
+            message.isHidden = false
+            message.text = messageType.display
+        }
     }
 
     override func willMove(toSuperview newSuperview: UIView?) {

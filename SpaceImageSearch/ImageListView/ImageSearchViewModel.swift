@@ -21,6 +21,7 @@ final class ImageSearchViewModel: NSObject {
     var updateContentForResults: (() -> Void)?
 
     // Search
+    var searchInProgress: Bool = false
     var searchQuery: String = ""
     var searchTopic: SearchTopic? {
         didSet {
@@ -59,12 +60,15 @@ final class ImageSearchViewModel: NSObject {
 
         searchTask?.cancel()
         searchTask = nil
-        
+        searchInProgress = true
+        updateContentForResults?()
         let newSearch = Task {
             do {
                 let batch = try await imageService.search(query: query, searchTopic: topic)
+                searchInProgress = false
                 await replaceImages(batch, animatingChange: true)
             } catch {
+                searchInProgress = false
                 showSearchError?(error)
             }
         }

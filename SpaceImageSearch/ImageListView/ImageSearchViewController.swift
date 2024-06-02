@@ -85,7 +85,9 @@ final class ImageSearchViewController: UICollectionViewController {
                 return
             }
 
-            if viewModel.searchQuery.isEmpty {
+            if viewModel.searchInProgress {
+                noResultsView.setMessage(.inProgress)
+            } else if viewModel.searchQuery.isEmpty {
                 noResultsView.setMessage(.newSearch)
             } else {
                 noResultsView.setMessage(.noResultsFound)
