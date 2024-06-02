@@ -13,6 +13,9 @@ final class SearchHeader: UICollectionReusableView {
     let searchField = UISearchTextField()
     let categoryPicker = UISegmentedControl()
 
+    let searchFieldHeight: CGFloat = 44.0
+    let stackSpacing: CGFloat = 8.0
+
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
@@ -30,7 +33,7 @@ final class SearchHeader: UICollectionReusableView {
                                      animated: false)
 
         stackView.axis = .vertical
-        stackView.spacing = 2
+        stackView.spacing = stackSpacing
         stackView.distribution = .equalSpacing
         stackView.alignment = .center
 
@@ -52,8 +55,12 @@ final class SearchHeader: UICollectionReusableView {
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
-            searchField.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            categoryPicker.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            searchField.heightAnchor.constraint(equalToConstant: searchFieldHeight),
+            searchField.leadingAnchor.constraint(equalTo: leadingAnchor),
+            searchField.trailingAnchor.constraint(equalTo: trailingAnchor),
+
+            categoryPicker.leadingAnchor.constraint(equalTo: leadingAnchor),
+            categoryPicker.trailingAnchor.constraint(equalTo: trailingAnchor),
         ]
         NSLayoutConstraint.activate(constraints)
     }

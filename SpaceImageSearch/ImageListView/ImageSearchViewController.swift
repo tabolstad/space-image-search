@@ -41,7 +41,7 @@ final class ImageSearchViewController: UICollectionViewController {
 
         viewModel.dataSource = dataSource
         
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = UIColor(named: "ViewBackground")
 
         collectionView.register(ImageCollectionViewCell.self, 
                                 forCellWithReuseIdentifier: Self.imageCellReuseIdentifier)
@@ -80,7 +80,7 @@ final class ImageSearchViewController: UICollectionViewController {
         // Search Header
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(70.0)
+            heightDimension: .estimated(80)
         )
         let searchHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
