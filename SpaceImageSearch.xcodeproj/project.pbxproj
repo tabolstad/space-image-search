@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1414402B2C0CB6FA00F5D19F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1414402A2C0CB6FA00F5D19F /* Localizable.xcstrings */; };
 		1414402D2C0CB82700F5D19F /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414402C2C0CB82700F5D19F /* String+Localized.swift */; };
+		1414402F2C0CC43900F5D19F /* NoResultsMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414402E2C0CC43900F5D19F /* NoResultsMessageView.swift */; };
 		142DE4992C08D2D8001043CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4982C08D2D8001043CB /* AppDelegate.swift */; };
 		142DE49B2C08D2D8001043CB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE49A2C08D2D8001043CB /* SceneDelegate.swift */; };
 		142DE4A22C08D2D9001043CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4A12C08D2D9001043CB /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		1414402A2C0CB6FA00F5D19F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		1414402C2C0CB82700F5D19F /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
+		1414402E2C0CC43900F5D19F /* NoResultsMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsMessageView.swift; sourceTree = "<group>"; };
 		142DE4952C08D2D8001043CB /* SpaceImageSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceImageSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		142DE4982C08D2D8001043CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		142DE49A2C08D2D8001043CB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				14E9E6012C0922EB00E0E9B4 /* ImageSearchViewController.swift */,
 				14D768B12C09FE98003A89FE /* ImageCollectionViewCell.swift */,
 				14CF8A4E2C0A5EF1001C4441 /* SearchHeader.swift */,
+				1414402E2C0CC43900F5D19F /* NoResultsMessageView.swift */,
 			);
 			path = ImageListView;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				14E9E6002C0922E200E0E9B4 /* ImageSearchViewModel.swift in Sources */,
 				14D768B52C0A2DAB003A89FE /* ImageDetailView.swift in Sources */,
 				14E9E5E12C09062C00E0E9B4 /* NASALibraryAPI.swift in Sources */,
+				1414402F2C0CC43900F5D19F /* NoResultsMessageView.swift in Sources */,
 				14E9E5F22C091AD800E0E9B4 /* ImageService.swift in Sources */,
 				14E9E5E52C090A5700E0E9B4 /* NASAEndpoint.swift in Sources */,
 				14E9E5E72C0910BD00E0E9B4 /* APIConfiguration.swift in Sources */,

@@ -27,6 +27,7 @@ final class ImageSearchViewController: UICollectionViewController {
 
     private let viewModel: ImageSearchViewModel
     private let imageService: ImageService
+    private var noResultsView: NoResultsMessageView?
 
     private lazy var dataSource: ImageCollectionDataSource = buildDataSource()
 
@@ -40,10 +41,10 @@ final class ImageSearchViewController: UICollectionViewController {
         super.init(collectionViewLayout: layout)
 
         viewModel.dataSource = dataSource
-        
+
         collectionView.backgroundColor = UIColor.viewBackground
 
-        collectionView.register(ImageCollectionViewCell.self, 
+        collectionView.register(ImageCollectionViewCell.self,
                                 forCellWithReuseIdentifier: Self.imageCellReuseIdentifier)
 
         collectionView.register(SearchHeader.self,
@@ -55,16 +56,53 @@ final class ImageSearchViewController: UICollectionViewController {
         viewModel.showSearchError = { [weak self] error in
             self?.showSearchError(error)
         }
+        viewModel.updateContentForResults = { [weak self] in
+            self?.updateContentForResult()
+        }
+    }
+
+    func updateContentForResult() {
+        if viewModel.currentImages.isEmpty {
+
+            if noResultsView == nil {
+                let noResultsView = NoResultsMessageView()
+                self.noResultsView = noResultsView
+            }
+            guard let noResultsView else {
+                return
+            }
+            if viewModel.searchQuery.isEmpty {
+                noResultsView.setMessage(.newSearch)
+            } else {
+                noResultsView.setMessage(.noResultsFound)
+            }
+            view.addSubview(noResultsView)
+
+            noResultsView.translatesAutoresizingMaskIntoConstraints = false
+            let constraints = [
+                noResultsView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+                noResultsView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+                noResultsView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            ]
+            NSLayoutConstraint.activate(constraints)
+        } else {
+            noResultsView?.removeFromSuperview()
+            noResultsView = nil
+        }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateContentForResult()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.viewModel.searchTopic = .location
-        showSearchError(APIError.unexpectedResponse)
     }
 
     private static func makeLayout() -> UICollectionViewLayout {

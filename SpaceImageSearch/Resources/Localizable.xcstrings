@@ -85,6 +85,30 @@
         }
       }
     },
+    "SearchScreen.NewSearchMessage" : {
+      "comment" : "Message shown when the search query is clear.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for your favorite space images: Mars, JPL, Rockets, Supernova, etc."
+          }
+        }
+      }
+    },
+    "SearchScreen.NoResultsFoundMessage" : {
+      "comment" : "Message shown when the api returns no results.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No search results found."
+          }
+        }
+      }
+    },
     "SearchScreen.Title" : {
       "comment" : "Title shown by search screen view controller.",
       "extractionState" : "manual",
@@ -92,7 +116,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "\"Space Image Search\""
+            "value" : "Space Image Search"
           }
         }
       }

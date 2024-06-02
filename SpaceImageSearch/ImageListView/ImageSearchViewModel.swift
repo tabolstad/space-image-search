@@ -12,23 +12,28 @@ typealias ImageDataSourceSnapshot = NSDiffableDataSourceSnapshot<ImageSearchView
 
 final class ImageSearchViewModel: NSObject {
 
+    private var imageService: ImageService
+
     var dataSource: ImageCollectionDataSource?
     var showSearchError: ((Error) -> Void)?
     var updateSearchPlacehoder: ((String) -> Void)?
+    var updateContentForResults: (() -> Void)?
     var searchTopic: SearchTopic? {
         didSet {
             didUpdateSearchTopic()
         }
     }
 
-    private var imageService: ImageService
-
     // Search
+    var searchQuery: String = ""
     private let searchDebounceTime: UInt64 = 500_000_000
-    private var searchQuery: String = ""
     private var searchTask: Task<Void, any Error>?
     // Pagination
-    private var currentImages: [SpaceImage] = []
+    var currentImages: [SpaceImage] = [] {
+        didSet {
+            updateContentForResults?()
+        }
+    }
     private var nextPage: URL?
     private var totalFoundCount: Int = 0
 
@@ -146,11 +151,11 @@ extension ImageSearchViewModel: UISearchTextFieldDelegate, UITextFieldDelegate {
         guard let newQuery else {
             return
         }
+        searchQuery = newQuery
         if newQuery == "" {
             clearImages()
             return
         }
-        searchQuery = newQuery
         performSearchTask(query: newQuery,
                           topic: searchTopic,
                           animatingChange: true)
