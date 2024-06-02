@@ -29,9 +29,10 @@ final class ImageDetailView: UIView {
     init(viewModel: ImageDetailViewModel) {
 
         self.viewModel = viewModel
+        
         super.init(frame: .zero)
-        self.tintColor = UIColor.darkGray
-        self.backgroundColor = UIColor.white
+
+        self.backgroundColor = UIColor.viewBackground
 
         stackView.axis = .vertical
         stackView.alignment = .top

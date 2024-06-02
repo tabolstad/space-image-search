@@ -16,7 +16,7 @@ final class SearchHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        searchField.backgroundColor = UIColor.lightGray
+        searchField.backgroundColor = UIColor.searchBarBackground
 
         categoryPicker.isMomentary = false
         categoryPicker.insertSegment(with: UIImage(systemName: "doc.text.magnifyingglass"),
