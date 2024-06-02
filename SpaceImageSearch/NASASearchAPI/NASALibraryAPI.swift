@@ -28,12 +28,12 @@ final class NASALibraryAPI {
     }
 
     func request<T: Decodable>(_ endpoint: NASAEndpoint) async throws -> T {
+
         // Build Request
         let request = buildRequest(endpoint: endpoint)
 
         // Send Request
         let (data, urlResponse) = try await urlSession.data(for: request)
-
         // Handle Response
         try handleResponse(urlResponse)
         // Decode Data

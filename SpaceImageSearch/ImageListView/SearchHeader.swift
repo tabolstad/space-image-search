@@ -19,6 +19,12 @@ final class SearchHeader: UICollectionReusableView {
         }
     }
 
+    var searchString: String = "" {
+        didSet {
+            searchField.text = searchString
+        }
+    }
+
     private let searchFieldHeight: CGFloat = 44.0
     private let stackSpacing: CGFloat = 8.0
 

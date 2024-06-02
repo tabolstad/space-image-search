@@ -67,24 +67,25 @@ final class ImageSearchViewController: UICollectionViewController {
             if noResultsView == nil {
                 let noResultsView = NoResultsMessageView()
                 self.noResultsView = noResultsView
+
+                view.addSubview(noResultsView)
+                noResultsView.translatesAutoresizingMaskIntoConstraints = false
+                let constraints = [
+                    noResultsView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+                    noResultsView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+                    noResultsView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                ]
+                NSLayoutConstraint.activate(constraints)
             }
             guard let noResultsView else {
                 return
             }
+
             if viewModel.searchQuery.isEmpty {
                 noResultsView.setMessage(.newSearch)
             } else {
                 noResultsView.setMessage(.noResultsFound)
             }
-            view.addSubview(noResultsView)
-
-            noResultsView.translatesAutoresizingMaskIntoConstraints = false
-            let constraints = [
-                noResultsView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-                noResultsView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                noResultsView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            ]
-            NSLayoutConstraint.activate(constraints)
         } else {
             noResultsView?.removeFromSuperview()
             noResultsView = nil
@@ -95,14 +96,18 @@ final class ImageSearchViewController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        DispatchQueue.main.async {
+            // We need to wait until the collection view is loaded.
+            // Otherwise the header will not get set.
+            self.viewModel.searchTopic = .title
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateContentForResult()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.viewModel.searchTopic = .location
     }
 
     private static func makeLayout() -> UICollectionViewLayout {
@@ -189,6 +194,10 @@ final class ImageSearchViewController: UICollectionViewController {
             searchHeader?.categoryPicker.addTarget(viewModel, action: #selector(ImageSearchViewModel.searchTopicSelected(sender:)), for: .valueChanged)
             viewModel.updateSearchPlacehoder = { searchPlaceholderString in
                 searchHeader?.searchPlaceholder = searchPlaceholderString
+            }
+
+            viewModel.updateSearchField = { searchString in
+                searchHeader?.searchString = searchString
             }
 
             return searchHeader

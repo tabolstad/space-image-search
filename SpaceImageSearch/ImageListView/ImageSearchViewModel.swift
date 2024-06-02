@@ -17,15 +17,16 @@ final class ImageSearchViewModel: NSObject {
     var dataSource: ImageCollectionDataSource?
     var showSearchError: ((Error) -> Void)?
     var updateSearchPlacehoder: ((String) -> Void)?
+    var updateSearchField: ((String) -> Void)?
     var updateContentForResults: (() -> Void)?
+
+    // Search
+    var searchQuery: String = ""
     var searchTopic: SearchTopic? {
         didSet {
             didUpdateSearchTopic()
         }
     }
-
-    // Search
-    var searchQuery: String = ""
     private let searchDebounceTime: UInt64 = 500_000_000
     private var searchTask: Task<Void, any Error>?
     // Pagination
@@ -75,6 +76,9 @@ final class ImageSearchViewModel: NSObject {
 
     private func clearImages(animatingChange: Bool = true) {
 
+        searchTask?.cancel()
+        searchTask = nil
+        
         currentImages = []
         totalFoundCount = 0
         nextPage = nil
@@ -127,6 +131,10 @@ final class ImageSearchViewModel: NSObject {
     }
 
     private func didUpdateSearchTopic() {
+        clearImages()
+        searchQuery = ""
+        updateSearchField?(searchQuery)
+
         let placeholder = switch searchTopic {
         case .title:
             "SearchHeader.Placeholder.Title".localized
@@ -144,6 +152,7 @@ final class ImageSearchViewModel: NSObject {
 extension ImageSearchViewModel: UISearchTextFieldDelegate, UITextFieldDelegate {
 
     func textFieldDidChangeSelection(_ textField: UITextField) {
+
         let newQuery = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         guard newQuery != searchQuery else {
             return
