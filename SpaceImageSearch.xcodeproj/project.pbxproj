@@ -18,6 +18,7 @@
 		142DE4CC2C08F14C001043CB /* nasa_search_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 142DE4CB2C08F14C001043CB /* nasa_search_response.json */; };
 		142DE4CE2C08F1B3001043CB /* APISearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */; };
 		142DE4D02C08F92A001043CB /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142DE4CF2C08F92A001043CB /* TestData.swift */; };
+		144E81792C0CFAC500CD3B80 /* ImageSearchViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E81782C0CFAC500CD3B80 /* ImageSearchViewController+Layout.swift */; };
 		14BCB87E2C0B405A00B9360B /* ImageBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BCB87D2C0B405A00B9360B /* ImageBatch.swift */; };
 		14BCB8802C0B409E00B9360B /* SearchTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BCB87F2C0B409E00B9360B /* SearchTopic.swift */; };
 		14C859F62C0B4E090015584E /* URL+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C859F52C0B4E090015584E /* URL+Safe.swift */; };
@@ -63,6 +64,7 @@
 		142DE4CB2C08F14C001043CB /* nasa_search_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nasa_search_response.json; sourceTree = "<group>"; };
 		142DE4CD2C08F1B3001043CB /* APISearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISearchResponse.swift; sourceTree = "<group>"; };
 		142DE4CF2C08F92A001043CB /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		144E81782C0CFAC500CD3B80 /* ImageSearchViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageSearchViewController+Layout.swift"; sourceTree = "<group>"; };
 		14BCB87D2C0B405A00B9360B /* ImageBatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBatch.swift; sourceTree = "<group>"; };
 		14BCB87F2C0B409E00B9360B /* SearchTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTopic.swift; sourceTree = "<group>"; };
 		14C859F52C0B4E090015584E /* URL+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Safe.swift"; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			children = (
 				14E9E5FF2C0922E200E0E9B4 /* ImageSearchViewModel.swift */,
 				14E9E6012C0922EB00E0E9B4 /* ImageSearchViewController.swift */,
+				144E81782C0CFAC500CD3B80 /* ImageSearchViewController+Layout.swift */,
 				14D768B12C09FE98003A89FE /* ImageCollectionViewCell.swift */,
 				14CF8A4E2C0A5EF1001C4441 /* SearchHeader.swift */,
 				1414402E2C0CC43900F5D19F /* NoResultsMessageView.swift */,
@@ -330,6 +333,7 @@
 				1414402F2C0CC43900F5D19F /* NoResultsMessageView.swift in Sources */,
 				14E9E5F22C091AD800E0E9B4 /* ImageService.swift in Sources */,
 				14E9E5E52C090A5700E0E9B4 /* NASAEndpoint.swift in Sources */,
+				144E81792C0CFAC500CD3B80 /* ImageSearchViewController+Layout.swift in Sources */,
 				14E9E5E72C0910BD00E0E9B4 /* APIConfiguration.swift in Sources */,
 				14E9E6022C0922EB00E0E9B4 /* ImageSearchViewController.swift in Sources */,
 				14D768B72C0A2DB2003A89FE /* ImageDetailViewController.swift in Sources */,

@@ -13,19 +13,15 @@ final class ImageSearchViewController: UICollectionViewController {
         case all
     }
 
-    private static let headerSupplementaryViewKind = "HeaderSupplementaryView"
-    private static let searchHeaderReuseIdentifier = "SearchReuseIdentifier"
-    private static let imageCellReuseIdentifier = "ImageCollectionCell"
-
-    private static var columns: Int = 3
-    private static var itemHeight: CGFloat = 150
-    private static var itemSpacing: CGFloat = 4
-    private static var lineSpacing: CGFloat = 4
-    private static var contentInset: CGFloat = 16
+    static var columns: Int = 3
+    static var itemHeight: CGFloat = 150
+    static var itemSpacing: CGFloat = 4
+    static var lineSpacing: CGFloat = 4
+    static var contentInset: CGFloat = 16
 
     let searchBar = UISearchBar()
 
-    private let viewModel: ImageSearchViewModel
+    let viewModel: ImageSearchViewModel
     private let imageService: ImageService
     private var noResultsView: NoResultsMessageView?
 
@@ -40,25 +36,36 @@ final class ImageSearchViewController: UICollectionViewController {
         let layout = Self.makeLayout()
         super.init(collectionViewLayout: layout)
 
-        viewModel.dataSource = dataSource
-
+        title = "SearchScreen.Title".localized
         collectionView.backgroundColor = UIColor.viewBackground
 
-        collectionView.register(ImageCollectionViewCell.self,
-                                forCellWithReuseIdentifier: Self.imageCellReuseIdentifier)
+        registerCollectionViewItems()
 
-        collectionView.register(SearchHeader.self,
-                                forSupplementaryViewOfKind: Self.headerSupplementaryViewKind,
-                                withReuseIdentifier: Self.searchHeaderReuseIdentifier)
-
-        title = "SearchScreen.Title".localized
-
+        viewModel.dataSource = dataSource
         viewModel.showSearchError = { [weak self] error in
             self?.showSearchError(error)
         }
         viewModel.updateContentForResults = { [weak self] in
             self?.updateContentForResult()
         }
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        DispatchQueue.main.async {
+            // We need to wait until the collection view is loaded.
+            // Otherwise the header will not get set.
+            self.viewModel.searchTopic = .title
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateContentForResult()
     }
 
     func updateContentForResult() {
@@ -92,119 +99,6 @@ final class ImageSearchViewController: UICollectionViewController {
         }
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        DispatchQueue.main.async {
-            // We need to wait until the collection view is loaded.
-            // Otherwise the header will not get set.
-            self.viewModel.searchTopic = .title
-        }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateContentForResult()
-    }
-
-    private static func makeLayout() -> UICollectionViewLayout {
-
-        // Image Items
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: NSCollectionLayoutDimension.fractionalWidth(1.0 / CGFloat(columns)),
-            heightDimension: NSCollectionLayoutDimension.uniformAcrossSiblings(estimate: itemHeight)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: NSCollectionLayoutDimension.uniformAcrossSiblings(estimate: itemHeight)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: columns)
-        group.interItemSpacing = NSCollectionLayoutSpacing.fixed(itemSpacing)
-
-        // Search Header
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(80)
-        )
-        let searchHeader = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: Self.headerSupplementaryViewKind,
-            alignment: .top
-        )
-        searchHeader.pinToVisibleBounds = true
-
-        // Configure Section
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = lineSpacing
-        section.contentInsets = NSDirectionalEdgeInsets(top: contentInset,
-                                                        leading: contentInset,
-                                                        bottom: contentInset,
-                                                        trailing: contentInset)
-        section.boundarySupplementaryItems = [searchHeader]
-
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        let layout = UICollectionViewCompositionalLayout(
-            section: section,
-            configuration: config
-        )
-        return layout
-    }
-
-    private func buildDataSource() -> ImageCollectionDataSource {
-
-        // Images
-        let dataSource = ImageCollectionDataSource(collectionView: collectionView) { [weak self] (
-            collectionView,
-            indexPath,
-            spaceImage) -> UICollectionViewCell? in
-
-            guard let self else {
-                return nil
-            }
-
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.imageCellReuseIdentifier, for: indexPath) as! ImageCollectionViewCell
-            cell.title.text = "\(spaceImage.title)"
-            cell.previewUrl = spaceImage.thumbnail
-            cell.fetchImage = self.viewModel.fetchImage
-            return cell
-        }
-
-        // Header View
-        dataSource.supplementaryViewProvider = { [weak self] (
-            collectionView: UICollectionView,
-            kind: String,
-            indexPath: IndexPath) -> UICollectionReusableView? in
-
-            guard let self else {
-                return nil
-            }
-
-            let searchHeader = collectionView.dequeueReusableSupplementaryView(
-                ofKind: Self.headerSupplementaryViewKind,
-                withReuseIdentifier: Self.searchHeaderReuseIdentifier,
-                for: indexPath
-            ) as? SearchHeader
-            searchHeader?.searchField.delegate = viewModel
-            searchHeader?.categoryPicker.selectedSegmentIndex = viewModel.searchTopic?.rawValue ?? 0
-            searchHeader?.categoryPicker.addTarget(viewModel, action: #selector(ImageSearchViewModel.searchTopicSelected(sender:)), for: .valueChanged)
-            viewModel.updateSearchPlacehoder = { searchPlaceholderString in
-                searchHeader?.searchPlaceholder = searchPlaceholderString
-            }
-
-            viewModel.updateSearchField = { searchString in
-                searchHeader?.searchString = searchString
-            }
-
-            return searchHeader
-        }
-        return dataSource
-    }
-
     private func showSearchError(_ error: Error) {
 
         let alert = UIAlertController(
@@ -218,6 +112,8 @@ final class ImageSearchViewController: UICollectionViewController {
         }
     }
 }
+
+// MARK: - Collection View Delegate
 
 extension ImageSearchViewController {
 
