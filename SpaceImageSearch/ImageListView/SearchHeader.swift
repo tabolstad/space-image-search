@@ -13,8 +13,14 @@ final class SearchHeader: UICollectionReusableView {
     let searchField = UISearchTextField()
     let categoryPicker = UISegmentedControl()
 
-    let searchFieldHeight: CGFloat = 44.0
-    let stackSpacing: CGFloat = 8.0
+    var searchPlaceholder: String = "" {
+        didSet {
+            searchField.placeholder = searchPlaceholder
+        }
+    }
+
+    private let searchFieldHeight: CGFloat = 44.0
+    private let stackSpacing: CGFloat = 8.0
 
     override init(frame: CGRect) {
         super.init(frame: .zero)

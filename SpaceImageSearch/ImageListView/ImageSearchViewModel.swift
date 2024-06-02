@@ -13,8 +13,13 @@ typealias ImageDataSourceSnapshot = NSDiffableDataSourceSnapshot<ImageSearchView
 final class ImageSearchViewModel: NSObject {
 
     var dataSource: ImageCollectionDataSource?
-    var searchTopic: SearchTopic? = .title
     var showSearchError: ((Error) -> Void)?
+    var updateSearchPlacehoder: ((String) -> Void)?
+    var searchTopic: SearchTopic? {
+        didSet {
+            didUpdateSearchTopic()
+        }
+    }
 
     private var imageService: ImageService
 
@@ -114,6 +119,20 @@ final class ImageSearchViewModel: NSObject {
             searchTopic = nil
         }
         clearImages()
+    }
+
+    private func didUpdateSearchTopic() {
+        let placeholder = switch searchTopic {
+        case .title:
+            "Search Image Title"
+        case .photographer:
+            "Search Photographer Name"
+        case .location:
+            "Search Location"
+        case nil:
+            "Search for NASA Images"
+        }
+        updateSearchPlacehoder?(placeholder)
     }
 }
 

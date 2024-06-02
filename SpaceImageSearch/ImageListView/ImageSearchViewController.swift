@@ -61,6 +61,11 @@ final class ImageSearchViewController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.searchTopic = .location
+    }
+
     private static func makeLayout() -> UICollectionViewLayout {
 
         // Image Items
@@ -143,6 +148,9 @@ final class ImageSearchViewController: UICollectionViewController {
             searchHeader?.searchField.delegate = viewModel
             searchHeader?.categoryPicker.selectedSegmentIndex = viewModel.searchTopic?.rawValue ?? 0
             searchHeader?.categoryPicker.addTarget(viewModel, action: #selector(ImageSearchViewModel.searchTopicSelected(sender:)), for: .valueChanged)
+            viewModel.updateSearchPlacehoder = { searchPlaceholderString in
+                searchHeader?.searchPlaceholder = searchPlaceholderString
+            }
 
             return searchHeader
         }
