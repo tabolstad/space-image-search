@@ -28,8 +28,8 @@ struct APIItem: Decodable {
 struct APIDataItem: Decodable {
     let nasa_id: String
 
-    let center: String
-    let date_created: String
+    let center: String?
+    let date_created: String?
     let description: String?
     let keywords: [String]?
     let media_type: String?

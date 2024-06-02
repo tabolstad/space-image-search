@@ -27,7 +27,7 @@ extension SpaceImage {
 
         self.id = data.nasa_id
         self.description = data.description ?? ""
-        self.location = data.location ?? data.center
+        self.location = data.location ?? data.center ?? ""
         self.thumbnail = thumbnail
         self.title = data.title
 
